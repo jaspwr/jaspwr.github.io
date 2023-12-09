@@ -1,0 +1,48 @@
+:root {
+  --primary-text: #000;
+  --primary-background: #fff;
+  --secondary-text: #fff;
+  --secondary-background: #000;
+  --clickable-hover: #075396;
+}
+
+.shadowed-container {
+  box-shadow: 7px 7px 10px rgba(0, 0, 0, 0.15);
+  background-color: var(--primary-background);
+  border-radius: 20px;
+  padding: 15px;
+  z-index: 2;
+}
+
+.grid {
+  height: 9.7rem;
+  position: absolute;
+  z-index: -2;
+  top: 50%;
+  left: 50%;
+}
+
+.bg-element {
+  z-index: -1;
+  pointer-events: none;
+}
+
+@font-face {
+  font-family: 'DMSerifDisplay-Regular';
+  src: url('/fonts/DMSerif.woff');
+}
+
+.heading-text {
+  font-family: 'DMSerifDisplay-Regular';
+  font-size: 2.5rem;
+  color: var(--primary-text);
+}
+
+.clickable {
+  cursor: pointer;
+  transition: color 0.5s ease-in-out;
+}
+
+.clickable:hover {
+  color: var(--clickable-hover);
+}
