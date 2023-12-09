@@ -1,9 +1,13 @@
 .blurb-main {
     width: 40rem;
-    height: 10rem;
+    height: 12rem;
     padding: 1.5rem !important;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-20rem, -10rem);
+}
+
+.blurb-subtext {
+    margin: 0.4rem;
 }

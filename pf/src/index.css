@@ -4,6 +4,7 @@
   --secondary-text: #fff;
   --secondary-background: #000;
   --clickable-hover: #075396;
+  overflow: hidden;
 }
 
 .shadowed-container {
@@ -12,6 +13,7 @@
   border-radius: 20px;
   padding: 15px;
   z-index: 2;
+  font-family: "BondiModa-VariableFont";
 }
 
 .grid {
@@ -25,15 +27,43 @@
 .bg-element {
   z-index: -1;
   pointer-events: none;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+}
+
+@keyframes bobkf {
+  0%,
+  100% {
+    transform: translateY(0.3rem);
+  }
+  50% {
+    transform: translateY(-0.3rem);
+  }
+}
+
+.star {
+  width: 2.7rem;
+  animation: bobkf 3s ease-in-out infinite;
 }
 
 @font-face {
-  font-family: 'DMSerifDisplay-Regular';
-  src: url('/fonts/DMSerif.woff');
+  font-family: "DMSerifDisplay-Regular";
+  src: url("/fonts/DMSerif.woff");
+}
+
+@font-face {
+  font-family: "BondiModa-VariableFont";
+  src: url("/fonts/BodoniModa-VariableFont_opszwght.woff");
+}
+
+@font-face {
+  font-family: "Tamzen";
+  src: url("/fonts/Tamzen8x15r.ttf");
 }
 
 .heading-text {
-  font-family: 'DMSerifDisplay-Regular';
+  font-family: "DMSerifDisplay-Regular";
   font-size: 2.5rem;
   color: var(--primary-text);
 }
@@ -45,4 +75,14 @@
 
 .clickable:hover {
   color: var(--clickable-hover);
+}
+
+.whole-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
 }
