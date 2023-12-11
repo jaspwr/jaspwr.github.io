@@ -1,6 +1,6 @@
 import React from "react";
-import Popout from "./Popout";
 import "./LangIcon.css";
+import Tooltip from "./Tooltip";
 
 interface Props {
   name: string;
@@ -23,9 +23,9 @@ const LangIcon = ({ name, imgSrc }: Props) => {
       <span onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         <img className="lang-icon" src={imgSrc} alt={name} />
       </span>
-      <Popout show={showTooltip}>
+      <Tooltip show={showTooltip}>
         <div className="tooltip">{name}</div>
-      </Popout>
+      </Tooltip>
     </>
   );
 };

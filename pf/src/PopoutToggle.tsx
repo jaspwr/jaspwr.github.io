@@ -3,14 +3,17 @@ import Popout from "./Popout";
 
 interface Props {
   children: React.ReactNode;
+  button: React.ReactNode;
 }
 
-const PopoutToggle = ({ children }: Props) => {
+const PopoutToggle = ({ children , button }: Props) => {
   const [show, setShow] = useState(false);
 
   return (
     <>
-      <button onClick={() => setShow(!show)}>Toggle</button>
+      <span onClick={() => setShow(!show)}>
+        {button}
+      </span>
       <Popout show={show}>{children}</Popout>
     </>
   );

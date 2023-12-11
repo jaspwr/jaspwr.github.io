@@ -1,0 +1,25 @@
+.contact-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    max-width: 60rem;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.contact-title {
+    font-size: 5rem !important;
+}
+
+.white-bg {
+    background-color: white;
+}
+
+.contact-subtext {
+  font-family: "BondiModa-VariableFont";
+}
+
+.star-margin {
+    margin-left: 3rem;
+    margin-right: 3rem;
+}

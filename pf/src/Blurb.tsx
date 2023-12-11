@@ -1,7 +1,7 @@
-import React from "react";
 import LangIcon from "./LangIcon";
 import "./Blurb.css";
 import AsmScroll from "./AsmScroll";
+import { depthStyle } from "./depthStyles";
 
 interface Props {
   scroll: number;
@@ -28,27 +28,9 @@ const Blurb = ({ scroll }: Props) => {
     animationDelay: "0.5s",
   };
 
-  const depthStyle = (z: number, stage: number) => {
-    let depth = z - scroll;
-    let focus = scroll - stage;
-
-    console.log(depth, focus);
-    const styles: React.CSSProperties = {
-      transform: `scale(${depth})`,
-      filter: `blur(${focus * 10}px)`,
-      opacity: `${1 - focus}`,
-    };
-
-    if (Math.abs(focus) < 0.1) {
-      styles.filter = undefined;
-      styles.opacity = undefined;
-    }
-
-    return styles;
-  };
   return (
     <>
-      <div className="whole-screen" style={depthStyle(1.4, 0)}>
+      <div className="whole-screen" style={depthStyle(scroll, 1.4, 0)}>
         <div style={star1Style} className="bg-element">
           <img className="star" src="/decor/star.svg" />
         </div>
@@ -60,7 +42,7 @@ const Blurb = ({ scroll }: Props) => {
           />
         </div>
       </div>
-      <div className="whole-screen" style={depthStyle(1.3, 0)}>
+      <div className="whole-screen" style={depthStyle(scroll, 1.3, 0)}>
         <img
           className="grid bg-element"
           style={grid1Style}
@@ -73,9 +55,9 @@ const Blurb = ({ scroll }: Props) => {
         />
         <AsmScroll />
       </div>
-      <div className="whole-screen" style={depthStyle(1.5, 0)}>
+      <div className="whole-screen" style={depthStyle(scroll, 1.5, 0)}>
         <div className="blurb-main shadowed-container">
-          <span className="my-name heading-text">Jasper Parker</span>
+          <span className="my-name heading-text">Something developer</span>
           <p className="blurb-subtext">
             Hi, I'm a developer with experience in a vast array of lorem ipsum
             dolor cosecutor ect. ect.

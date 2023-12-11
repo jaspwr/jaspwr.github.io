@@ -1,0 +1,45 @@
+.project-previews-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 70%;
+    max-width: 60rem;
+    display: flex;
+    flex-wrap: wrap;
+    transform: translate(-50%, -14rem);
+}
+
+.projects-title {
+  transform: translate(-24rem, -22rem);
+  font-size: 6rem !important;
+}
+
+#gpu-compiler-title {
+    line-height: 1.3rem;
+    font-size: 1.5rem !important;
+    display: block;
+    margin-top: 0.6rem;
+}
+
+.double-lang-icons {
+    margin-top: 0.1rem;
+}
+
+.double-lang-icons span {
+    display: block;
+    margin-top: -0.5rem;
+}
+
+.opengl-icon img {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-top: -0.2rem;
+    margin-bottom: -0.5rem;
+    transform: translateX(-0.3rem);
+}
+
+#lia-logo {
+    height: 1.9rem;
+    margin-top: 0.4rem;
+    filter: brightness(0);
+}

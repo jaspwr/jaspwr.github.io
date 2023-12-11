@@ -1,0 +1,48 @@
+.demo-window {
+  position: absolute;
+  margin: auto;
+  z-index: 6;
+  background-color: var(--primary-background);
+  border-radius: 5px;
+  padding: 1rem;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.darkener {
+  background-color: black;
+  opacity: 0.5;
+  z-index: 5;
+}
+
+.close-button {
+  width: 1rem;
+  transition: filter 0.2s ease-in-out;
+  filter: brightness(0);
+}
+
+.close-button:hover {
+  filter: brightness(1.7);
+}
+
+.demo-title {
+  font-size: 1.5rem !important;
+}
+
+.demo-header {
+  display: grid;
+  grid-template-columns: 5.0fr 0.2fr;
+  grid-template-rows: 0.4fr;
+  grid-auto-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas: "demo-header-title demo-header-close";
+}
+
+.demo-header-close {
+  grid-area: demo-header-close;
+}
+
+.demo-header-title {
+  grid-area: demo-header-title;
+}

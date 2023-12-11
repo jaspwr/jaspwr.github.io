@@ -1,6 +1,6 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from "react";
-import Popout from "./Popout";
+import { ChangeEvent, useEffect, useRef } from "react";
 import PopoutToggle from "./PopoutToggle";
+import "./ChessBoard.css";
 
 const ChessBoard = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -22,6 +22,48 @@ const ChessBoard = () => {
   };
 
   useEffect(() => {
+    // Prevents multiple loads. useEffect does this sometimes in dev mode
+    // for some bizarre reason.
+    const engineWorker = new Worker("engineWorker.js");
+
+    // type Move = {
+    //   from: number;
+    //   to: number;
+    //   promo?: number;
+    // };
+
+    const squareIdToCoords = (id: number) => {
+      const x = id % 8;
+      const y = Math.floor(id / 8);
+      return { x, y };
+    };
+
+    const coordsToSquareId = (x: number, y: number) => {
+      if (x < 0 || x > 7 || y < 0 || y > 7) return -1;
+      return y * 8 + x;
+    };
+
+    const positionToNotation = (pos: number) => {
+      const { x, y } = squareIdToCoords(pos);
+      return String.fromCharCode(97 + x) + (8 - y);
+    };
+
+    const notationToPosition = (notation: string) => {
+      const x = notation.charCodeAt(0) - 97;
+      const y = 8 - parseInt(notation[1]);
+      return coordsToSquareId(x, y);
+    };
+
+    const moveToNotation = (from: number, to: number) => {
+      return positionToNotation(from) + positionToNotation(to);
+    };
+
+    const NotationToMove = (notation: string) => {
+      const from = notationToPosition(notation.slice(0, 2));
+      const to = notationToPosition(notation.slice(2, 4));
+      return { from, to };
+    };
+
     const size = { width: 500, height: 500 };
 
     const squareSideLength = size.width / 8;
@@ -94,17 +136,6 @@ const ChessBoard = () => {
           queen: true,
         },
       },
-    };
-
-    const squareIdToCoords = (id: number) => {
-      const x = id % 8;
-      const y = Math.floor(id / 8);
-      return { x, y };
-    };
-
-    const coordsToSquareId = (x: number, y: number) => {
-      if (x < 0 || x > 7 || y < 0 || y > 7) return -1;
-      return y * 8 + x;
     };
 
     const drawTiles = (
@@ -276,15 +307,17 @@ const ChessBoard = () => {
 
           if (piece == P_BKING && gs.castleRights.black.king) {
             moves.push(coordsToSquareId(6, 0));
-          } else if (piece == P_BKING && gs.castleRights.black.queen) {
+          }
+          if (piece == P_BKING && gs.castleRights.black.queen) {
             moves.push(coordsToSquareId(2, 0));
-          } else if (piece == P_WKING && gs.castleRights.white.king) {
+          }
+          if (piece == P_WKING && gs.castleRights.white.king) {
             moves.push(coordsToSquareId(6, 7));
-          } else if (piece == P_WKING && gs.castleRights.white.queen) {
+          }
+          if (piece == P_WKING && gs.castleRights.white.queen) {
             moves.push(coordsToSquareId(2, 7));
           }
 
-          console.log(gs);
           break;
         case P_BPAWN:
         case P_WPAWN:
@@ -386,18 +419,44 @@ const ChessBoard = () => {
       }
 
       if (gs.squares[from] == P_BKING) {
+        if (gs.castleRights.black.king && x_i == 4 && y_i == 0 && x_f == 6) {
+          gs.squares[coordsToSquareId(7, 0)] = null;
+          gs.squares[coordsToSquareId(5, 0)] = P_BROOK;
+        } else if (
+          gs.castleRights.black.queen &&
+          x_i == 4 &&
+          y_i == 0 &&
+          x_f == 2
+        ) {
+          gs.squares[coordsToSquareId(0, 0)] = null;
+          gs.squares[coordsToSquareId(3, 0)] = P_BROOK;
+        }
+
         gs.castleRights.black.king = false;
         gs.castleRights.black.queen = false;
       } else if (gs.squares[from] == P_WKING) {
+        if (gs.castleRights.white.king && x_i == 4 && y_i == 7 && x_f == 6) {
+          gs.squares[coordsToSquareId(7, 7)] = null;
+          gs.squares[coordsToSquareId(5, 7)] = P_WROOK;
+        } else if (
+          gs.castleRights.white.queen &&
+          x_i == 4 &&
+          y_i == 7 &&
+          x_f == 2
+        ) {
+          gs.squares[coordsToSquareId(0, 7)] = null;
+          gs.squares[coordsToSquareId(3, 7)] = P_WROOK;
+        }
+
         gs.castleRights.white.king = false;
         gs.castleRights.white.queen = false;
-      } else if (gs.squares[from] == P_BROOK && x_i == 0 && y_i == 0) {
+      } else if (gs.squares[from] == P_BROOK && x_i == 0 && y_i == 7) {
         gs.castleRights.black.queen = false;
-      } else if (gs.squares[from] == P_BROOK && x_i == 7 && y_i == 0) {
+      } else if (gs.squares[from] == P_BROOK && x_i == 7 && y_i == 7) {
         gs.castleRights.black.king = false;
-      } else if (gs.squares[from] == P_WROOK && x_i == 0 && y_i == 7) {
+      } else if (gs.squares[from] == P_WROOK && x_i == 0 && y_i == 0) {
         gs.castleRights.white.queen = false;
-      } else if (gs.squares[from] == P_WROOK && x_i == 7 && y_i == 7) {
+      } else if (gs.squares[from] == P_WROOK && x_i == 7 && y_i == 0) {
         gs.castleRights.white.king = false;
       }
 
@@ -405,16 +464,40 @@ const ChessBoard = () => {
       gs.squares[from] = null;
     };
 
+    engineWorker.onmessage = (e) => {
+      const moveNotation = e.data;
+      console.log(moveNotation);
+
+      const move = NotationToMove(moveNotation);
+
+      movePiece(gs, move.from, move.to);
+
+      render(ctx, gs, undefined, undefined);
+    };
+
     board.addEventListener("mouseup", (event) => {
       if (dragging === null) return;
+
+      const from = dragging;
+      dragging = null;
 
       const x = Math.floor(event.offsetX / squareSideLength);
       const y = Math.floor(event.offsetY / squareSideLength);
       const to = coordsToSquareId(x, y);
-      movePiece(gs, dragging, to);
 
-      dragging = null;
+      if (!moveIsLegal(gs, from, to)) {
+        render(ctx, gs, undefined, undefined);
+        return;
+      }
+
+      movePiece(gs, from, to);
       render(ctx, gs, undefined, undefined);
+
+      console.log(moveToNotation(from, to));
+      engineWorker.postMessage({
+        type: "genMove",
+        move: moveToNotation(from, to),
+      });
     });
 
     const draggingDraw = (ctx: CanvasRenderingContext2D, event: MouseEvent) => {
@@ -470,36 +553,42 @@ const ChessBoard = () => {
     rerenderBoard = () => {
       render(ctx, gs, undefined, undefined);
     };
-  });
+  }, []);
 
   return (
     <>
+      <div id="settings-icon">
+        <PopoutToggle
+          button={
+            <img className="settings-cog" src="icons/cog.svg" alt="cog" />
+          }
+        >
+          <ul>
+            <li>
+              White squares colour:
+              <input
+                type="color"
+                value={whiteSquaresColour}
+                onChange={whiteSquaresColourChange}
+              ></input>
+            </li>
+            <li>
+              Black squares colour:
+              <input
+                type="color"
+                value={blackSquaresColour}
+                onChange={blackSquaresColourChange}
+              ></input>
+            </li>
+          </ul>
+        </PopoutToggle>
+      </div>
       <canvas ref={canvasRef} width="500" height="500"></canvas>
       <div id="piece-attributions">
         Pieces by Cburnett, available under a Creative Commons
         Attribution-ShareAlike (CC BY-SA 3.0) license. Original images source:
         https://commons.wikimedia.org/wiki/Template:SVG_chess_pieces#Table_of_chess_piece_SVG-images.
       </div>
-      <PopoutToggle>
-        <ul>
-          <li>
-            White squares colour:
-            <input
-              type="color"
-              value={whiteSquaresColour}
-              onChange={whiteSquaresColourChange}
-            ></input>
-          </li>
-          <li>
-            Black squares colour:
-            <input
-              type="color"
-              value={blackSquaresColour}
-              onChange={blackSquaresColourChange}
-            ></input>
-          </li>
-        </ul>
-      </PopoutToggle>
     </>
   );
 };

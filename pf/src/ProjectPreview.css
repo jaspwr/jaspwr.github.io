@@ -1,0 +1,110 @@
+.project-preview {
+  height: 12rem;
+  width: 17rem;
+  margin: 0.5rem;
+  display: inline;
+}
+
+.gh-link-icon {
+  height: 1.7rem;
+  width: 1.7rem;
+  margin-top: -0.2rem;
+  filter: brightness(0);
+  transition: filter 0.5s ease-in-out;
+}
+
+.gh-link-icon:hover {
+  filter: brightness(0) invert(1) brightness(0.4) sepia(1) saturate(3)
+    hue-rotate(175deg);
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 0.7fr 1.3fr 1.7fr 0.4fr;
+  grid-template-rows: 0.4fr 1.6fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "gh-link title title lang"
+    "image image description description";
+}
+
+.gh-link {
+  grid-area: gh-link;
+}
+
+.image {
+  grid-area: image;
+  overflow: hidden;
+  margin-right: 0.5rem;
+}
+
+.description {
+  grid-area: description;
+  line-height: 1.1rem;
+  font-size: 0.9rem;
+}
+
+.title {
+  grid-area: title;
+  font-size: 1.7rem !important;
+  margin-left: -0.5rem !important;
+  margin-top: -0.5rem !important;
+}
+
+.lang {
+  grid-area: lang;
+}
+
+.lang-icon {
+  height: 1.7rem;
+  width: 1.7rem;
+  margin-top: -0.2rem;
+}
+
+.preview-image {
+  height: 100%;
+  pointer-events: none;
+  border-radius: 0.5rem;
+}
+
+.side-grad {
+  pointer-events: none;
+  position: absolute;
+  height: 9.7rem;
+  width: 6rem;
+  transform: translate(1.9rem, -0.1rem);
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0),
+    var(--primary-background)
+  );
+}
+
+.clickable-image {
+  cursor: pointer;
+}
+
+.play-icon {
+  position: absolute;
+  width: 3rem;
+  opacity: 0.8;
+  transition: opacity 0.2s ease-in-out;
+  transform: translate(2.4rem, 3rem);
+  z-index: 2000;
+}
+
+.play-icon:hover {
+  opacity: 1;
+}
+
+.play-text {
+  z-index: 2000;
+  position: absolute;
+  font-size: 0.7rem;
+  color: #666;
+
+  transform: translate(1rem, 6.5rem);
+  text-shadow: 0px 0px 5px white;
+  font-family: arial;
+}
