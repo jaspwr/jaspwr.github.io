@@ -71,7 +71,7 @@
 .side-grad {
   pointer-events: none;
   position: absolute;
-  height: 9.7rem;
+  height: 9.9rem;
   width: 6rem;
   transform: translate(1.9rem, -0.1rem);
   background: linear-gradient(
@@ -85,12 +85,31 @@
   cursor: pointer;
 }
 
+.demo-button {
+  background-color: var(--secondary-background);
+  color: var(--secondary-text);
+  border-radius: 0.5rem;
+  padding: 0.2rem;
+  padding-top: 0.3rem;
+  font-family: 'monospace';
+  font-weight: bold;
+  font-size: 0.75rem;
+  transition: filter 0.2s ease-in-out;
+  text-align: center;
+  margin-top: 0.5rem;
+  cursor: pointer;
+}
+
+.demo-button:hover {
+  filter: brightness(1.4);
+}
+
 .play-icon {
   position: absolute;
   width: 3rem;
   opacity: 0.8;
   transition: opacity 0.2s ease-in-out;
-  transform: translate(2.4rem, 3rem);
+  transform: translate(2.1rem, 3rem);
   z-index: 2000;
 }
 
@@ -103,8 +122,7 @@
   position: absolute;
   font-size: 0.7rem;
   color: #666;
-
+  width: 5rem;
   transform: translate(1rem, 6.5rem);
-  text-shadow: 0px 0px 5px white;
   font-family: arial;
 }

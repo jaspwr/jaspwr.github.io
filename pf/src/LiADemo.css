@@ -1,0 +1,57 @@
+.lia-demo-container {
+  display: grid;
+  grid-template-columns: 1.3fr 0.5fr 1.5fr 0.5fr 1.2fr;
+  grid-template-rows: 0.2fr 1.2fr;
+  grid-auto-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "lia-input-title lia-input-title lia-output-title lia-output-title latex-render-title"
+    "lia-input lia-arrow-1 lia-output lia-arror-2 latex-render";
+}
+
+.lia-demo-block {
+    width: 18rem;
+    height: 27rem;
+    overflow-y: scroll;
+}
+
+.lia-input-field {
+    height: 100%;
+    resize: none;
+}
+
+.lia-input-title {
+  grid-area: lia-input-title;
+  font-size: 1.2rem !important;
+}
+
+.lia-output-title {
+  grid-area: lia-output-title;
+  font-size: 1.2rem !important;
+}
+
+.latex-render-title {
+  grid-area: latex-render-title;
+  font-size: 1.2rem !important;
+}
+
+.latex-render {
+  grid-area: latex-render;
+}
+
+.lia-output {
+  grid-area: lia-output;
+}
+
+.lia-input {
+  grid-area: lia-input;
+}
+
+.lia-arrow-1 {
+  grid-area: lia-arrow-1;
+}
+
+.lia-arror-2 {
+  grid-area: lia-arror-2;
+}

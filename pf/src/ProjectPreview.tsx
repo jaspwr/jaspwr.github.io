@@ -8,20 +8,21 @@ interface Props {
   lang: React.ReactNode;
   githubLink: string;
   clickAction?: () => void;
+  buttonBrightness?: string;
 }
 
 const ProjectPreview = (props: Props) => {
+  const buttonStyle = props.buttonBrightness
+    ? {
+        filter: `brightness(${props.buttonBrightness})`,
+      }
+    : {};
+
   const image = (
     <div
       className={`image ${props.clickAction ? "clickable-image" : ""}`}
       onClick={props.clickAction}
     >
-      {props.clickAction && (
-        <>
-          <img className="play-icon" src="icons/play.svg" alt="play" />
-          <span className="play-text">Open live demo</span>
-        </>
-      )}
       <div className="side-grad"></div>
       <img className="preview-image" src={props.image} alt="project preview" />
     </div>
@@ -35,7 +36,20 @@ const ProjectPreview = (props: Props) => {
         </a>
       </div>
       {image}
-      <div className="description">{props.description}</div>
+      <div className="description">
+        {
+          <>
+            <>{props.description}</>
+            <>
+              {props.clickAction && (
+                <div onClick={props.clickAction} className="demo-button">
+                  Open live demo
+                </div>
+              )}
+            </>
+          </>
+        }
+      </div>
       <div className="title heading-text">{props.title}</div>
       <div className="lang">{props.lang}</div>
     </div>

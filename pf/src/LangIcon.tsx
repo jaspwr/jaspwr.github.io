@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import "./LangIcon.css";
 import Tooltip from "./Tooltip";
 
@@ -7,7 +7,7 @@ interface Props {
   imgSrc: string;
 }
 
-const LangIcon = ({ name, imgSrc }: Props) => {
+const LangIcon = memo(({ name, imgSrc }: Props) => {
   let [showTooltip, setShowTooltip] = React.useState(false);
 
   const handleMouseEnter = () => {
@@ -28,6 +28,6 @@ const LangIcon = ({ name, imgSrc }: Props) => {
       </Tooltip>
     </>
   );
-};
+});
 
 export default LangIcon;

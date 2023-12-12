@@ -4,9 +4,10 @@ import "./FakeScrollBar.css";
 interface Props {
   scroll: number;
   setScroll: React.Dispatch<React.SetStateAction<number>>;
+  setHoldingScrollBar: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const FakeScrollBar = ({ scroll, setScroll }: Props) => {
+const FakeScrollBar = ({ scroll, setScroll, setHoldingScrollBar }: Props) => {
   const [scrolling, setScrolling] = useState(false);
 
   const innerBarStyle: React.CSSProperties = {
@@ -15,7 +16,8 @@ const FakeScrollBar = ({ scroll, setScroll }: Props) => {
 
   const handleMouseDown = (_: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     setScrolling(true);
-    document.documentElement.style.setProperty('user-select', 'none');
+    setHoldingScrollBar(true);
+    document.documentElement.style.setProperty("user-select", "none");
   };
 
   const handleMouseMove = (e: MouseEvent) => {
@@ -29,7 +31,8 @@ const FakeScrollBar = ({ scroll, setScroll }: Props) => {
 
   const handleMouseUp = (_: MouseEvent) => {
     setScrolling(false);
-    document.documentElement.style.setProperty('user-select', 'auto');
+    setHoldingScrollBar(false);
+    document.documentElement.style.setProperty("user-select", "auto");
   };
 
   useEffect(() => {

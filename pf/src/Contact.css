@@ -1,18 +1,18 @@
 .contact-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    max-width: 60rem;
-    transform: translate(-50%, -50%);
-    text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  max-width: 60rem;
+  transform: translate(-50%, -50%);
+  text-align: center;
 }
 
 .contact-title {
-    font-size: 5rem !important;
+  font-size: 5rem !important;
 }
 
 .white-bg {
-    background-color: white;
+  background-color: white;
 }
 
 .contact-subtext {
@@ -20,6 +20,81 @@
 }
 
 .star-margin {
-    margin-left: 3rem;
-    margin-right: 3rem;
+  margin-left: 3rem;
+  margin-right: 3rem;
+}
+
+.cont-details-container {
+  margin: 1rem;
+  width: 34rem;
+  display: grid;
+  grid-template-columns: 0.2fr 1.8fr;
+  grid-template-rows: 0.7fr 0.7fr 0.8fr 1fr;
+  grid-auto-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "cont-gh-icon cont-gh-link"
+    "cont-email-icon cont-email-email"
+    "cont-linkedin-icon cont-linkedin-link"
+    "cont-ph-icon cont-ph-number";
+}
+
+.cont-gh-icon {
+  grid-area: cont-gh-icon;
+}
+
+.cont-gh-link {
+  grid-area: cont-gh-link;
+}
+
+.cont-email-icon {
+  grid-area: cont-email-icon;
+}
+
+.cont-email-email {
+  grid-area: cont-email-email;
+}
+
+.cont-linkedin-icon {
+  grid-area: cont-linkedin-icon;
+}
+
+.cont-linkedin-link {
+  grid-area: cont-linkedin-link;
+}
+
+.cont-ph-icon {
+  grid-area: cont-ph-icon;
+}
+
+.cont-ph-number {
+  grid-area: cont-ph-number;
+}
+
+.contact-icon {
+  width: 2rem;
+  height: 2rem;
+  filter: brightness(0);
+}
+
+.cont-link {
+    padding-top: 0.4rem;
+    text-align: left;
+}
+
+.cont-link a {
+    font-family: "monospace";
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+    transition: color 0.2s ease-in-out;
+}
+
+.cont-link a:hover {
+    color: #7e7e7e;
+}
+
+.cont-link-no-hover a:hover {
+    color: black !important;
 }

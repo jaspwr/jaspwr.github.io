@@ -83,12 +83,15 @@ const Projects = ({ scroll, setDemo }: Props) => {
           />
           <ProjectPreview
             title={<img id="lia-logo" src="icons/lia.png" alt="LiA" />}
-            image=""
+            image="previews/lia.png"
             githubLink="https://github.com/jaspwr/LiA"
             description="
             A transpiled superset of TeX for writing LaTeX  designed to make LaTeX code less verbose and faster to write."
-            clickAction={() => {}}
+            clickAction={() => {
+              setDemo("lia");
+            }}
             lang={<LangIcon name="Rust" imgSrc="icons/rust.svg" />}
+            buttonBrightness="2.2"
           />
           <ProjectPreview
             title="vol-applet"

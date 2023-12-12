@@ -475,8 +475,8 @@ const ChessBoard = () => {
       render(ctx, gs, undefined, undefined);
     };
 
-    board.addEventListener("mouseup", (event) => {
-      if (dragging === null) return;
+    const handleMouseUp = (event: MouseEvent) => {
+          if (dragging === null) return;
 
       const from = dragging;
       dragging = null;
@@ -498,7 +498,10 @@ const ChessBoard = () => {
         type: "genMove",
         move: moveToNotation(from, to),
       });
-    });
+
+    };
+
+    board.addEventListener("mouseup", handleMouseUp);
 
     const draggingDraw = (ctx: CanvasRenderingContext2D, event: MouseEvent) => {
       if (
@@ -520,7 +523,7 @@ const ChessBoard = () => {
       );
     };
 
-    board.addEventListener("mousedown", (event) => {
+    const handleMouseDown = (event: MouseEvent) => {
       const x = Math.floor(event.offsetX / squareSideLength);
       const y = Math.floor(event.offsetY / squareSideLength);
       const id = coordsToSquareId(x, y);
@@ -536,22 +539,37 @@ const ChessBoard = () => {
       render(ctx, gs, legalMoves(gs, dragging), [dragging]);
 
       draggingDraw(ctx, event);
-    });
+    };
 
-    board.addEventListener("mousemove", (event) => {
+    board.addEventListener("mousedown", handleMouseDown);
+
+    const handleMouseMove = (event: MouseEvent) => {
       if (dragging === null) return;
 
       render(ctx, gs, legalMoves(gs, dragging), [dragging]);
       draggingDraw(ctx, event);
-    });
+    };
 
-    board.addEventListener("mouseout", (_) => {
+    board.addEventListener("mousemove", handleMouseMove);
+
+    const handleMouseOut = (_: Event) => {
       dragging = null;
       render(ctx, gs, undefined, undefined);
-    });
+    };
+
+    board.addEventListener("mouseout", handleMouseOut);
 
     rerenderBoard = () => {
       render(ctx, gs, undefined, undefined);
+    };
+
+    return () => {
+      engineWorker.terminate();
+      board.removeEventListener("mouseup", handleMouseUp);
+      board.removeEventListener("mousedown", handleMouseDown);
+      board.removeEventListener("mouseout", handleMouseOut);
+      board.removeEventListener("mousemove", handleMouseMove);
+      console.log("Cleaned up chess board");
     };
   }, []);
 

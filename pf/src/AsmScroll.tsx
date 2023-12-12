@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 import "./AsmScroll.css";
 
 const TEXT = `main:
@@ -57,7 +57,7 @@ __parseBreak:
   pop rbp
   ret`;
 
-const AsmScroll = () => {
+const AsmScroll = memo(() => {
   const [scrollPos, setScrollPos] = useState(0);
 
   const textStyle: React.CSSProperties = {
@@ -83,6 +83,6 @@ const AsmScroll = () => {
       <pre style={textStyle}>{displayText.join("\n")}</pre>
     </div>
   );
-};
+});
 
 export default AsmScroll;
