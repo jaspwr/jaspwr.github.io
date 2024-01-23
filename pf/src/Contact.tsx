@@ -6,16 +6,16 @@ interface Props {
 }
 
 const Contact = ({ scroll }: Props) => {
-  if (scroll < 0.7) {
-    return <></>;
-  }
-
   const starAnimationDelay = {
     animationDelay: "1.2s",
   };
 
+  const styles = depthStyle(scroll, 2.0, 1.0);
+
+  styles.pointerEvents = scroll < 0.7 ? "none" : "all";
+
   return (
-    <div className="whole-screen white-bg" style={depthStyle(scroll, 2.0, 1.0)}>
+    <div className="whole-screen white-bg" style={styles}>
       <div className="contact-container">
         <div className="contact-title heading-text">
           <img

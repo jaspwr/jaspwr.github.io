@@ -22,8 +22,6 @@ const ChessBoard = () => {
   };
 
   useEffect(() => {
-    // Prevents multiple loads. useEffect does this sometimes in dev mode
-    // for some bizarre reason.
     const engineWorker = new Worker("engineWorker.js");
 
     // type Move = {
@@ -283,7 +281,45 @@ const ChessBoard = () => {
       return moves;
     };
 
-    const legalMoves = (gs: GameState, pos: number) => {
+    const isCheck = (gs: GameState, side: any) => {
+      const kingPos = gs.squares.findIndex(
+        (piece) => piece === (side == 0 ? P_WKING : P_BKING)
+      );
+
+      console.log(kingPos, side === 0 ? "white" : "black");
+
+      const opp = side === 0 ? 1 : 0;
+      // gs.turn = opp;
+
+      let ret = false;
+      gs.squares
+        .map((piece, pos) => [piece, pos])
+        .filter(([piece, _pos]) => piece !== null && pieceColor(piece) === opp)
+        .forEach(([_piece, pos]) => {
+          if (pos === null) return;
+
+          const moves = legalMoves(gs, pos, false);
+          console.log(pos, _piece, moves);
+          console.log("king pos ", kingPos, " in moves?");
+          console.log(moves.includes(kingPos));
+          if (moves.includes(kingPos)) {
+            ret = true;
+          }
+        });
+
+      return ret;
+    };
+
+    const isMovingIntoCheck = (gs: GameState, from: number, to: number) => {
+      console.log(from, to);
+      const gsNext: GameState = JSON.parse(JSON.stringify(gs));
+      movePiece(gsNext, from, to, false);
+      const check = isCheck(gsNext, gs.turn);
+      console.log(check);
+      return check;
+    };
+
+    const legalMoves = (gs: GameState, pos: number, lookForChecks: boolean) => {
       const piece = gs.squares[pos];
 
       if (piece === null) return [];
@@ -393,17 +429,18 @@ const ChessBoard = () => {
 
       return moves
         .filter(squareExists)
+        .filter((to) => !lookForChecks || !isMovingIntoCheck(gs, pos, to))
         .filter(
           (to) =>
             !sameColor(gs.squares[to] || 0, piece) || gs.squares[to] === null
         );
     };
 
-    const moveIsLegal = (gs: GameState, from: number, to: number) =>
-      legalMoves(gs, from).includes(to);
+    const moveIsLegal = (gs: GameState, from: number, to: number, lookForChecks: boolean) =>
+      legalMoves(gs, from, lookForChecks).includes(to);
 
-    const movePiece = (gs: GameState, from: number, to: number) => {
-      if (!moveIsLegal(gs, from, to)) return;
+    const movePiece = (gs: GameState, from: number, to: number, lookForChecks: boolean) => {
+      if (!moveIsLegal(gs, from, to, lookForChecks)) return;
 
       const { x: x_i, y: y_i } = squareIdToCoords(from);
       const { x: x_f, y: y_f } = squareIdToCoords(to);
@@ -470,13 +507,13 @@ const ChessBoard = () => {
 
       const move = NotationToMove(moveNotation);
 
-      movePiece(gs, move.from, move.to);
+      movePiece(gs, move.from, move.to, false);
 
       render(ctx, gs, undefined, undefined);
     };
 
     const handleMouseUp = (event: MouseEvent) => {
-          if (dragging === null) return;
+      if (dragging === null) return;
 
       const from = dragging;
       dragging = null;
@@ -485,12 +522,12 @@ const ChessBoard = () => {
       const y = Math.floor(event.offsetY / squareSideLength);
       const to = coordsToSquareId(x, y);
 
-      if (!moveIsLegal(gs, from, to)) {
+      if (!moveIsLegal(gs, from, to, true)) {
         render(ctx, gs, undefined, undefined);
         return;
       }
 
-      movePiece(gs, from, to);
+      movePiece(gs, from, to, true);
       render(ctx, gs, undefined, undefined);
 
       console.log(moveToNotation(from, to));
@@ -498,7 +535,6 @@ const ChessBoard = () => {
         type: "genMove",
         move: moveToNotation(from, to),
       });
-
     };
 
     board.addEventListener("mouseup", handleMouseUp);
@@ -536,7 +572,7 @@ const ChessBoard = () => {
         y: event.offsetY - y * squareSideLength,
       };
 
-      render(ctx, gs, legalMoves(gs, dragging), [dragging]);
+      render(ctx, gs, legalMoves(gs, dragging, true), [dragging]);
 
       draggingDraw(ctx, event);
     };
@@ -546,7 +582,7 @@ const ChessBoard = () => {
     const handleMouseMove = (event: MouseEvent) => {
       if (dragging === null) return;
 
-      render(ctx, gs, legalMoves(gs, dragging), [dragging]);
+      render(ctx, gs, legalMoves(gs, dragging, true), [dragging]);
       draggingDraw(ctx, event);
     };
 

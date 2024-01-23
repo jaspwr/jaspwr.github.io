@@ -6,20 +6,16 @@ interface Props {
 }
 
 const ProjectsTitle = ({ scroll }: Props) => {
-    const offsetting = scroll - 0.5;
-    console.log(scroll);
+  const offsetting = scroll - 0.5;
 
   const letters = Array.from("Projects").map((c, i) => {
     // const opacity = Math.min(Math.max((offsetting * 1.2 + i*0.1 + 0.4),0),1);
-    const posOffset = Math.min(offsetting * (i+2) , 0);
+    const posOffset = Math.min(offsetting * (i + 2), 0);
     const style: React.CSSProperties = {
-        opacity: 1,
-        transform: `translateY(${-posOffset * 1.5}rem)`,
-        position: "relative",
-        display: "inline-block"
-    }
+      transform: `translateY(${-posOffset * 1.5}rem)`,
+    };
 
-    return <span style={style}>{c}</span>;
+    return <span className="title-letter" style={style}>{c}</span>;
   });
 
   return (

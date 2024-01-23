@@ -1,17 +1,17 @@
 .lia-demo-container {
   display: grid;
-  grid-template-columns: 1.3fr 0.5fr 1.5fr 0.5fr 1.2fr;
-  grid-template-rows: 0.2fr 1.2fr;
   grid-auto-rows: 1fr;
+  grid-template-columns: 1.4fr 0.6fr 1.3fr;
+  grid-template-rows: 0.3fr 1.1fr;
   gap: 0px 0px;
-  grid-auto-flow: row;
   grid-template-areas:
-    "lia-input-title lia-input-title lia-output-title lia-output-title latex-render-title"
-    "lia-input lia-arrow-1 lia-output lia-arror-2 latex-render";
+    "lia-input-title lia-input-title lia-output-title"
+    "lia-input lia-arrow-1 lia-output";
 }
 
+
 .lia-demo-block {
-    width: 18rem;
+    width: 30rem;
     height: 27rem;
     overflow-y: scroll;
 }

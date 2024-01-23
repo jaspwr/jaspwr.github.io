@@ -23,12 +23,8 @@ const Projects = ({ scroll, setDemo }: Props) => {
     transform: "translate(0rem, -19rem)",
   };
 
-  if (scroll < 0.1) {
-    return <></>;
-  }
-
   return (
-    <>
+    <div style={{ pointerEvents: scroll < 0.1 ? "none" : "all" }}>
       <div className="whole-screen" style={depthStyle(scroll, 1.6, 0.5)}>
         <ProjectsTitle scroll={scroll} />
         <div style={starStyle} className="bg-element">
@@ -109,7 +105,7 @@ const Projects = ({ scroll, setDemo }: Props) => {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -57,10 +57,14 @@ const Blurb = ({ scroll }: Props) => {
       </div>
       <div className="whole-screen" style={depthStyle(scroll, 1.5, 0)}>
         <div className="blurb-main shadowed-container">
-          <span className="my-name heading-text">Something developer</span>
+          <span className="my-name heading-text">
+            Jasper Parker - Full Stack Developer
+          </span>
           <p className="blurb-subtext">
-            Hi, I'm a developer with experience in a vast array of lorem ipsum
-            dolor cosecutor ect. ect.
+            Welcome to my digital space! I'm Jasper Parker, a dynamic full-stack
+            developer with a passion for crafting innovative solutions. Armed
+            with expertise in Rust, C/C++, JS/TS, Haskell, and C#, I thrive in
+            the diverse realm of programming.
           </p>
           <br />
           <br />

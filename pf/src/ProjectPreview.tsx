@@ -12,12 +12,6 @@ interface Props {
 }
 
 const ProjectPreview = (props: Props) => {
-  const buttonStyle = props.buttonBrightness
-    ? {
-        filter: `brightness(${props.buttonBrightness})`,
-      }
-    : {};
-
   const image = (
     <div
       className={`image ${props.clickAction ? "clickable-image" : ""}`}
