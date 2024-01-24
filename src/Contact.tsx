@@ -1,11 +1,20 @@
 import { depthStyle } from "./depthStyles";
 import "./Contact.css";
+import { useWindowSize } from "@uidotdev/usehooks";
 
 interface Props {
   scroll: number;
 }
 
 const Contact = ({ scroll }: Props) => {
+  const size = useWindowSize();
+
+  const contactStyles: React.CSSProperties = {};
+
+  if (size.width !== null && size.width < 700) {
+    contactStyles.maxWidth = `21rem`;
+  }
+
   const starAnimationDelay = {
     animationDelay: "1.2s",
   };
@@ -16,7 +25,7 @@ const Contact = ({ scroll }: Props) => {
 
   return (
     <div className="whole-screen white-bg" style={styles}>
-      <div className="contact-container">
+      <div style={contactStyles} className="contact-container">
         <div className="contact-title heading-text">
           <img
             className="star"

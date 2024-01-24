@@ -9,16 +9,17 @@
     "lia-input lia-arrow-1 lia-output";
 }
 
-
 .lia-demo-block {
-    width: 30rem;
-    height: 27rem;
-    overflow-y: scroll;
+  width: 30rem;
+  height: 27rem;
+  overflow-y: scroll;
 }
 
 .lia-input-field {
-    height: 100%;
-    resize: none;
+  height: 100%;
+  resize: none;
+  font-size: 1rem;
+  font-family: monospace;
 }
 
 .lia-input-title {
@@ -46,6 +47,7 @@
 
 .lia-input {
   grid-area: lia-input;
+  width: 30rem;
 }
 
 .lia-arrow-1 {
@@ -54,4 +56,20 @@
 
 .lia-arror-2 {
   grid-area: lia-arror-2;
+}
+
+.lia-input {
+  margin: 1rem;
+}
+
+.lia-output {
+  margin: 1rem;
+}
+
+.lia-blurb {
+  margin-bottom: 1rem;
+  margin-top: -0.4rem;
+  margin-left: 5rem;
+  margin-right: 5rem;
+  font-family: "BondiModa-VariableFont";
 }

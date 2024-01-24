@@ -1,14 +1,34 @@
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  background-color: var(--primary-background);
+}
+
+* {
+  transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out, box-shadow 0.5s ease-in-out, filter 0.5s ease-in-out;
+}
+
 :root {
   --primary-text: #000;
   --primary-background: #fff;
   --secondary-text: #fff;
   --secondary-background: #5f5f5f;
   --clickable-hover: #075396;
+  --icon-filter: invert(0);
+  --shadow-colour: rgba(0, 0, 0, 0.15);
   overflow: hidden;
 }
 
 .shadowed-container {
-  box-shadow: 7px 7px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 7px 7px 10px var(--shadow-colour);
   background-color: var(--primary-background);
   border-radius: 20px;
   padding: 15px;
@@ -17,6 +37,7 @@
 }
 
 .grid {
+  filter: var(--icon-filter);
   height: 9.7rem;
   position: absolute;
   z-index: -2;
@@ -30,6 +51,8 @@
   top: 50%;
   left: 50%;
   position: absolute;
+  transition: opacity 0.5s ease-in-out;
+  opacity: var(--bg-element-opacity);
 }
 
 @keyframes bobkf {
@@ -43,6 +66,7 @@
 }
 
 .star {
+  filter: var(--icon-filter);
   width: 2.7rem;
   animation: bobkf 3s ease-in-out infinite;
 }

@@ -1,7 +1,7 @@
 
 var createModule = (() => {
   var _scriptDir = typeof document !== 'undefined' && document.currentScript ? document.currentScript.src : undefined;
-  
+
   return (
 function(moduleArg = {}) {
 
@@ -23,7 +23,7 @@ createModule().then((module) => {
 
   makeMoveInEngine = module.cwrap("WASM_make_move", null, ["string"]);
 
-  console.log("Engine loaded");
+  postMessage({ type: "engineLoaded" });
 });
 
 onmessage = (e) => {

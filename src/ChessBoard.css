@@ -7,7 +7,7 @@
 
 .settings-cog {
   width: 1.2rem;
-  filter: brightness(0);
+  filter: brightness(0) var(--icon-filter);
   transition: filter 0.2s ease-in-out;
 }
 
@@ -19,4 +19,8 @@
   position: absolute;
   right: 0;
   transform: translate(-3rem, -3.3rem);
+}
+
+#chess-settings {
+  font-family: Arial, Helvetica, sans-serif;
 }

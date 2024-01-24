@@ -9,6 +9,7 @@ import Projects from "./Projects";
 import Demo from "./Demo";
 import Contact from "./Contact";
 import LiADemo from "./LiADemo";
+import ScrollIndicator from "./ScrollIndicator";
 
 const scrollVelocity: { v: number } = { v: 0 };
 
@@ -24,9 +25,11 @@ function App() {
   useEffect(() => {
     if (showingDemo !== "none") return () => {};
 
+    // TODO: rewrite this whole thing
+
     const handleWheel = (e: WheelEvent) => {
       console.log(e.deltaY);
-      scrollVelocity.v = Math.sign(e.deltaY) * 0.05;
+      scrollVelocity.v = Math.sign(e.deltaY) * 0.035;
       console.log(scrollVelocity);
     };
 
@@ -107,6 +110,7 @@ function App() {
           )))}
       <FakeScrollBar scroll={scroll} setHoldingScrollBar={setHoldingScrollBar} setScroll={setScroll} />
       <DarkModeToggle />
+      <ScrollIndicator scroll={scroll} />
       <Blurb scroll={scroll} />
       <Projects scroll={scroll} setDemo={setShowingDemo} />
       <Contact scroll={scroll} />

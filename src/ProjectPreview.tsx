@@ -14,8 +14,8 @@ interface Props {
 const ProjectPreview = (props: Props) => {
   const image = (
     <div
-      className={`image ${props.clickAction ? "clickable-image" : ""}`}
-      onClick={props.clickAction}
+      className={`image clickable-image`}
+      onClick={() => window.open(props.githubLink, '_blank')?.focus()}
     >
       <div className="side-grad"></div>
       <img className="preview-image" src={props.image} alt="project preview" />

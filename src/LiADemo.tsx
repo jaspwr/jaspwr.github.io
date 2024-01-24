@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import Editor from "@monaco-editor/react";
+
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
@@ -40,6 +42,7 @@ const LiADemo = () => {
 
   return (
     <>
+      <div className="lia-blurb">LiA is a superset of TeX that extends its syntax adding new several new features. These added features are just designed to make LaTeX code less verbose and faster to write. Below is a live demo that allows you to edit the example code on the left and see the resulting transpilation on the right.</div>
       <div className="lia-demo-container">
         <div className="lia-input-title heading-text">Input LiA</div>
         <div className="lia-output-title heading-text">Transpiled TeX</div>
@@ -55,14 +58,21 @@ const LiADemo = () => {
           </div>
         </div>
         <div className="lia-input">
-          <textarea
+          <Editor
+            language="lia"
+            theme="vs-dark"
+            value={lia}
+            onChange={(e) => {
+              if (e === undefined) return;
+              setLia(e);
+            }}
+          />
+          {/* <textarea
             className="lia-input-field lia-demo-block"
             value={lia}
             onChange={(e) => setLia(e.target.value)}
-          />
+          /> */}
         </div>
-        <div className="lia-arrow-1">&gt;</div>
-        {/* <div className="lia-arror-2">&gt;</div> */}
       </div>
     </>
   );

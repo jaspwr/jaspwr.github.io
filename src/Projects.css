@@ -18,7 +18,14 @@
     line-height: 1.3rem;
     font-size: 1.5rem !important;
     display: block;
-    margin-top: 0.6rem;
+    margin-top: 0.4rem;
+}
+
+#bd-title {
+    line-height: 1.3rem;
+    font-size: 1.5rem !important;
+    display: block;
+    margin-top: 0.2rem;
 }
 
 .double-lang-icons {
@@ -41,5 +48,5 @@
 #lia-logo {
     height: 1.9rem;
     margin-top: 0.4rem;
-    filter: brightness(0);
+    filter: brightness(0) var(--icon-filter);
 }

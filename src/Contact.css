@@ -5,6 +5,7 @@
   max-width: 60rem;
   transform: translate(-50%, -50%);
   text-align: center;
+  color: var(--primary-text)
 }
 
 .contact-title {
@@ -12,7 +13,7 @@
 }
 
 .white-bg {
-  background-color: white;
+  background-color: var(--primary-background);
 }
 
 .contact-subtext {
@@ -75,7 +76,7 @@
 .contact-icon {
   width: 2rem;
   height: 2rem;
-  filter: brightness(0);
+  filter: brightness(0) var(--icon-filter);
 }
 
 .cont-link {
@@ -87,7 +88,7 @@
     font-family: "monospace";
     font-weight: bold;
     text-decoration: none;
-    color: black;
+    color: var(--primary-text);
     transition: color 0.2s ease-in-out;
 }
 
@@ -96,5 +97,5 @@
 }
 
 .cont-link-no-hover a:hover {
-    color: black !important;
+    color: var(--primary-text) !important;
 }

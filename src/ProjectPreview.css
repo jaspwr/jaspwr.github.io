@@ -3,13 +3,14 @@
   width: 17rem;
   margin: 0.5rem;
   display: inline;
+  color: var(--primary-text)
 }
 
 .gh-link-icon {
   height: 1.7rem;
   width: 1.7rem;
-  margin-top: -0.2rem;
-  filter: brightness(0);
+  margin-top: -0.1rem;
+  filter: brightness(0) var(--icon-filter);
   transition: filter 0.5s ease-in-out;
 }
 

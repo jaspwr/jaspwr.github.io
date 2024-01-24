@@ -47,14 +47,14 @@ const Projects = ({ scroll, setDemo }: Props) => {
             title="Glimpse"
             image="previews/glimpse.png"
             githubLink="https://github.com/jaspwr/glimpse"
-            description="A simple GTK3 launcher/finder utility for GNU/Linux. Instantly searches files and installed applications."
+            description="A simple GTK3 launcher/file search engine for GNU/Linux. Instantly searches files and installed applications."
             lang={<LangIcon name="Rust" imgSrc="icons/rust.svg" />}
           />
           <ProjectPreview
             title="Chess Engine"
             image="previews/chess.png"
             githubLink="https://github.com/jaspwr/chess"
-            description="A chess engine written in C that uses bitboards, magic bitboards and a custom evaluation function."
+            description="A UCI compatible chess engine written in C that uses magic bitboards and a custom evaluation function."
             clickAction={() => {
               setDemo("chess");
             }}
@@ -67,12 +67,14 @@ const Projects = ({ scroll, setDemo }: Props) => {
                 Compiler
               </span>
             }
-            image=""
+            image="previews/gpu.png"
             githubLink="https://github.com/jaspwr/meowcc"
             description="A prototype C compiler written in GLSL compute shaders that compiles a subset of C to x86_64 assembly."
             lang={
               <span className="double-lang-icons">
-                <span className="opengl-icon"><LangIcon name="OpenGL" imgSrc="icons/gl.svg" /></span>
+                <span className="opengl-icon">
+                  <LangIcon name="OpenGL" imgSrc="icons/gl.svg" />
+                </span>
                 <LangIcon name="C++" imgSrc="icons/cpp.svg" />
               </span>
             }
@@ -97,11 +99,16 @@ const Projects = ({ scroll, setDemo }: Props) => {
             lang={<LangIcon name="Rust" imgSrc="icons/rust.svg" />}
           />
           <ProjectPreview
-            title={"Hello"}
-            image=""
-            githubLink=""
-            description=""
-            lang={<LangIcon name="Rust" imgSrc="icons/rust.svg" />}
+            title={<span id="bd-title">BetterDiscord plugins</span>}
+            image="https://raw.githubusercontent.com/jaspwr/BDPlugins/main/BetterAudioPlayer/img/dark.gif"
+            githubLink="https://github.com/jaspwr/BDPlugins"
+            description="Some plugins I've made for the BetterDiscord client."
+            lang={
+              <span className="double-lang-icons">
+                <LangIcon imgSrc="/icons/js.svg" name="Javascript" />
+                <LangIcon imgSrc="/icons/react.svg" name="React" />
+              </span>
+            }
           />
         </div>
       </div>

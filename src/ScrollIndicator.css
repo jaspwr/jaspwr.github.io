@@ -1,0 +1,9 @@
+.scroll-indicator {
+  position: absolute;
+  top: 100%;
+  right: 50%;
+  font-size: 2rem;
+  transform: translate(0, calc(-100% - 4rem));
+  z-index: 1;
+  color: var(--primary-text);
+}

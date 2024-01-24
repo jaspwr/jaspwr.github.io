@@ -18,7 +18,7 @@
 .close-button {
   width: 1rem;
   transition: filter 0.2s ease-in-out;
-  filter: brightness(0);
+  filter: brightness(0) var(--icon-filter);
 }
 
 .close-button:hover {

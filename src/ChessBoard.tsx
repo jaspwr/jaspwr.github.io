@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useRef } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import PopoutToggle from "./PopoutToggle";
 import "./ChessBoard.css";
 
@@ -8,6 +8,8 @@ const ChessBoard = () => {
   let whiteSquaresColour = "#ffffff";
   let blackSquaresColour = "#ffaaaa";
   let rerenderBoard = () => {};
+
+  const [playAsBlack, setPlayAsBlack] = useState(false);
 
   const blackSquaresColourChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newColor = event.target.value;
@@ -24,11 +26,23 @@ const ChessBoard = () => {
   useEffect(() => {
     const engineWorker = new Worker("engineWorker.js");
 
-    // type Move = {
-    //   from: number;
-    //   to: number;
-    //   promo?: number;
-    // };
+    enum PromoType {
+      Queen,
+      Rook,
+      Knight,
+      Bishop,
+    }
+
+    type Move = {
+      from: number;
+      to: number;
+      promo?: PromoType;
+    };
+
+    enum Side {
+      White,
+      Black,
+    }
 
     const squareIdToCoords = (id: number) => {
       const x = id % 8;
@@ -52,14 +66,55 @@ const ChessBoard = () => {
       return coordsToSquareId(x, y);
     };
 
-    const moveToNotation = (from: number, to: number) => {
-      return positionToNotation(from) + positionToNotation(to);
+    const moveToNotation = (move: Move) => {
+      let promo = "";
+
+      if (move.promo !== undefined) {
+        switch (move.promo) {
+          case PromoType.Queen:
+            promo = "q";
+            break;
+          case PromoType.Rook:
+            promo = "r";
+            break;
+          case PromoType.Knight:
+            promo = "k";
+            break;
+          case PromoType.Bishop:
+            promo = "b";
+            break;
+        }
+      }
+
+      return (
+        positionToNotation(move.from) + positionToNotation(move.to) + promo
+      );
     };
 
-    const NotationToMove = (notation: string) => {
+    const letterToPromoType = (letter: string): PromoType | undefined => {
+      switch (letter) {
+        case "q":
+          return PromoType.Queen;
+        case "r":
+          return PromoType.Rook;
+        case "b":
+          return PromoType.Bishop;
+        case "k":
+          return PromoType.Knight;
+      }
+    };
+
+    const NotationToMove = (notation: string): Move => {
       const from = notationToPosition(notation.slice(0, 2));
       const to = notationToPosition(notation.slice(2, 4));
-      return { from, to };
+
+      let promo: PromoType | undefined = undefined;
+
+      if (notation.length > 4) {
+        promo = letterToPromoType(notation[4]);
+      }
+
+      return { from, to, promo };
     };
 
     const size = { width: 500, height: 500 };
@@ -105,6 +160,7 @@ const ChessBoard = () => {
     let loadedImages = 0;
 
     type GameState = {
+      playingAs: Side;
       squares: (number | null)[];
       turn: number;
       enpassant: number | null;
@@ -121,6 +177,7 @@ const ChessBoard = () => {
     };
 
     const gs: GameState = {
+      playingAs: playAsBlack ? Side.Black : Side.White,
       squares: new Array(64).fill(null),
       turn: 0,
       enpassant: null,
@@ -138,11 +195,18 @@ const ChessBoard = () => {
 
     const drawTiles = (
       ctx: CanvasRenderingContext2D,
-      highlights: number[] | undefined
+      highlights: number[] | undefined,
+      displayAs: Side
     ) => {
+      if (displayAs === Side.Black) {
+        highlights = highlights?.map((pos) => invertPos(pos));
+      }
+
       for (let i: number = 0; i < 64; i++) {
         const { x, y } = squareIdToCoords(i);
-        const col = x % 2 == 0 ? y % 2 == 0 : (y + 1) % 2 == 0;
+        let col = x % 2 == 0 ? y % 2 == 0 : (y + 1) % 2 == 0;
+
+        if (displayAs === Side.Black) col = !col;
 
         if (highlights && highlights.includes(i)) {
           ctx.fillStyle = col ? "#aaaaaa" : "#aaaaaa";
@@ -160,10 +224,16 @@ const ChessBoard = () => {
       }
     };
 
+    const invertPos = (pos: number) => {
+      const { x, y } = squareIdToCoords(pos);
+      return coordsToSquareId(7 - x, 7 - y);
+    };
+
     const drawPieces = (
       ctx: CanvasRenderingContext2D,
       gs: GameState,
-      hiddenPieces: number[] | undefined
+      hiddenPieces: number[] | undefined,
+      displayAs: Side
     ) => {
       if (loadedImages < imagesLinks.length) return;
 
@@ -174,7 +244,9 @@ const ChessBoard = () => {
 
         if (piece === null) continue;
 
-        const { x, y } = squareIdToCoords(i);
+        let { x, y } = squareIdToCoords(
+          displayAs === Side.White ? i : invertPos(i)
+        );
 
         ctx.drawImage(
           pieceImages[piece],
@@ -192,9 +264,11 @@ const ChessBoard = () => {
       highlights: number[] | undefined,
       hiddenPieces: number[] | undefined
     ) => {
+      let displayAs = gs.playingAs;
+
       ctx.clearRect(0, 0, size.width, size.height);
-      drawTiles(ctx, highlights);
-      drawPieces(ctx, gs, hiddenPieces);
+      drawTiles(ctx, highlights, displayAs);
+      drawPieces(ctx, gs, hiddenPieces, displayAs);
     };
 
     const pieceImages = imagesLinks.map((link) => {
@@ -286,8 +360,6 @@ const ChessBoard = () => {
         (piece) => piece === (side == 0 ? P_WKING : P_BKING)
       );
 
-      console.log(kingPos, side === 0 ? "white" : "black");
-
       const opp = side === 0 ? 1 : 0;
       // gs.turn = opp;
 
@@ -299,9 +371,6 @@ const ChessBoard = () => {
           if (pos === null) return;
 
           const moves = legalMoves(gs, pos, false);
-          console.log(pos, _piece, moves);
-          console.log("king pos ", kingPos, " in moves?");
-          console.log(moves.includes(kingPos));
           if (moves.includes(kingPos)) {
             ret = true;
           }
@@ -310,14 +379,42 @@ const ChessBoard = () => {
       return ret;
     };
 
-    const isMovingIntoCheck = (gs: GameState, from: number, to: number) => {
-      console.log(from, to);
+    const shouldBePromo = (gs: GameState, move: Move) => {
+      const piece = gs.squares[move.from];
+
+      if (piece === null) return false;
+
+      const { x: _x, y } = squareIdToCoords(move.to);
+
+      if (piece === P_BPAWN && y === 7) return true;
+      if (piece === P_WPAWN && y === 0) return true;
+
+      return false;
+    };
+
+    const promoPiece = (type: PromoType, color: number): number => {
+      switch (type) {
+        case PromoType.Queen:
+          return color == 0 ? P_WQUEEN : P_BQUEEN;
+        case PromoType.Rook:
+          return color == 0 ? P_WROOK : P_BROOK;
+        case PromoType.Knight:
+          return color == 0 ? P_WKNIGHT : P_BKNIGHT;
+        case PromoType.Bishop:
+          return color == 0 ? P_WBISHOP : P_BBISHOP;
+      }
+    };
+
+    const isMovingIntoCheck = (gs: GameState, move: Move) => {
       const gsNext: GameState = JSON.parse(JSON.stringify(gs));
-      movePiece(gsNext, from, to, false);
+      movePiece(gsNext, move, false);
       const check = isCheck(gsNext, gs.turn);
-      console.log(check);
       return check;
     };
+
+    const squaresAreEmpty = (gs: GameState, squares: number[]): boolean => {
+      return squares.every((pos) => gs.squares[pos] === null);
+    }
 
     const legalMoves = (gs: GameState, pos: number, lookForChecks: boolean) => {
       const piece = gs.squares[pos];
@@ -341,16 +438,18 @@ const ChessBoard = () => {
             });
           });
 
-          if (piece == P_BKING && gs.castleRights.black.king) {
+          // FIXME: Needs to check if in check or the casting squares are under attack
+
+          if (piece == P_BKING && gs.castleRights.black.king && squaresAreEmpty(gs, [5, 6])) {
             moves.push(coordsToSquareId(6, 0));
           }
-          if (piece == P_BKING && gs.castleRights.black.queen) {
+          if (piece == P_BKING && gs.castleRights.black.queen && squaresAreEmpty(gs, [1, 2, 3])) {
             moves.push(coordsToSquareId(2, 0));
           }
-          if (piece == P_WKING && gs.castleRights.white.king) {
+          if (piece == P_WKING && gs.castleRights.white.king && squaresAreEmpty(gs, [61, 62])) {
             moves.push(coordsToSquareId(6, 7));
           }
-          if (piece == P_WKING && gs.castleRights.white.queen) {
+          if (piece == P_WKING && gs.castleRights.white.queen && squaresAreEmpty(gs, [57, 58, 59])) {
             moves.push(coordsToSquareId(2, 7));
           }
 
@@ -429,23 +528,29 @@ const ChessBoard = () => {
 
       return moves
         .filter(squareExists)
-        .filter((to) => !lookForChecks || !isMovingIntoCheck(gs, pos, to))
+        .filter(
+          (to) => !lookForChecks || !isMovingIntoCheck(gs, { from: pos, to })
+        )
         .filter(
           (to) =>
             !sameColor(gs.squares[to] || 0, piece) || gs.squares[to] === null
         );
     };
 
-    const moveIsLegal = (gs: GameState, from: number, to: number, lookForChecks: boolean) =>
-      legalMoves(gs, from, lookForChecks).includes(to);
+    const moveIsLegal = (gs: GameState, move: Move, lookForChecks: boolean) =>
+      legalMoves(gs, move.from, lookForChecks).includes(move.to);
 
-    const movePiece = (gs: GameState, from: number, to: number, lookForChecks: boolean) => {
-      if (!moveIsLegal(gs, from, to, lookForChecks)) return;
+    const movePiece = (gs: GameState, move: Move, lookForChecks: boolean) => {
+      const from = move.from;
+
+      const to = move.to;
+
+      if (!moveIsLegal(gs, move, lookForChecks)) return;
 
       const { x: x_i, y: y_i } = squareIdToCoords(from);
       const { x: x_f, y: y_f } = squareIdToCoords(to);
 
-      // todo: en passant taking
+      // FIXME: en passant taking
 
       if (gs.squares[from] === P_BPAWN && y_i == 1 && y_f == 3) {
         gs.enpassant = to;
@@ -497,18 +602,38 @@ const ChessBoard = () => {
         gs.castleRights.white.king = false;
       }
 
-      gs.squares[to] = gs.squares[from];
+      const piece = gs.squares[from];
+
+      if (piece === null) return;
+
+      if (move.promo !== undefined) {
+        gs.squares[to] = promoPiece(move.promo, pieceColor(piece));
+      } else {
+        gs.squares[to] = piece;
+      }
+
       gs.squares[from] = null;
+
+      gs.turn = gs.turn === 0 ? 1 : 0;
     };
 
     engineWorker.onmessage = (e) => {
+      if (e.data.type === "engineLoaded") {
+        if (gs.playingAs === Side.Black) {
+          engineWorker.postMessage({
+            type: "genMove",
+          });
+        }
+        return;
+      }
+
       const moveNotation = e.data;
       console.log(moveNotation);
 
       const move = NotationToMove(moveNotation);
 
-      movePiece(gs, move.from, move.to, false);
-
+      // Engine move
+      movePiece(gs, move, false);
       render(ctx, gs, undefined, undefined);
     };
 
@@ -520,20 +645,41 @@ const ChessBoard = () => {
 
       const x = Math.floor(event.offsetX / squareSideLength);
       const y = Math.floor(event.offsetY / squareSideLength);
-      const to = coordsToSquareId(x, y);
+      let to = coordsToSquareId(x, y);
 
-      if (!moveIsLegal(gs, from, to, true)) {
+      if (gs.playingAs === Side.Black) {
+        to = invertPos(to);
+      }
+
+      let move: Move = { from, to };
+
+      if (!moveIsLegal(gs, move, true)) {
         render(ctx, gs, undefined, undefined);
         return;
       }
 
-      movePiece(gs, from, to, true);
+      if (shouldBePromo(gs, move)) {
+        let promo: PromoType | undefined = undefined;
+
+        while (promo === undefined) {
+          let prompt_result = prompt("Promote to (q, r, b, k): ");
+
+          if (prompt_result !== null) {
+            promo = letterToPromoType(prompt_result);
+          }
+        }
+
+        move.promo = promo;
+      }
+
+      // Player move
+      movePiece(gs, move, true);
       render(ctx, gs, undefined, undefined);
 
-      console.log(moveToNotation(from, to));
+      console.log(moveToNotation(move));
       engineWorker.postMessage({
         type: "genMove",
-        move: moveToNotation(from, to),
+        move: moveToNotation(move),
       });
     };
 
@@ -560,11 +706,21 @@ const ChessBoard = () => {
     };
 
     const handleMouseDown = (event: MouseEvent) => {
+      if (gs.playingAs !== (gs.turn !== 1 ? Side.White : Side.Black)) return;
+
       const x = Math.floor(event.offsetX / squareSideLength);
       const y = Math.floor(event.offsetY / squareSideLength);
-      const id = coordsToSquareId(x, y);
+      let id = coordsToSquareId(x, y);
 
-      if (gs.squares[id] === null) return;
+      if (gs.playingAs === Side.Black) {
+        id = invertPos(id);
+      }
+
+      let piece = gs.squares[id];
+
+      if (piece === null) return;
+
+      if (gs.playingAs !== (pieceColor(piece) !== 1 ? Side.White : Side.Black)) return;
 
       dragging = id;
       draggingOffset = {
@@ -607,7 +763,7 @@ const ChessBoard = () => {
       board.removeEventListener("mousemove", handleMouseMove);
       console.log("Cleaned up chess board");
     };
-  }, []);
+  }, [playAsBlack]);
 
   return (
     <>
@@ -617,7 +773,17 @@ const ChessBoard = () => {
             <img className="settings-cog" src="icons/cog.svg" alt="cog" />
           }
         >
-          <ul>
+          <ul id="chess-settings">
+            <li>
+              Play as black:
+              <input
+                type="checkbox"
+                checked={playAsBlack}
+                onChange={(_e: ChangeEvent<HTMLInputElement>) => {
+                  setPlayAsBlack(!playAsBlack);
+                }}
+              ></input>
+            </li>
             <li>
               White squares colour:
               <input

@@ -9,6 +9,7 @@ export const depthStyle = (scroll: number, z: number, stage: number) => {
     transform: `scale(${depth})`,
     filter: `blur(${Math.abs(focus) * 10}px)`,
     opacity: `${opacity}`,
+    transition: 'none',
   };
 
   if (Math.abs(focus) < 0.05) {

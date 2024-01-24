@@ -3,11 +3,26 @@ import "./Blurb.css";
 import AsmScroll from "./AsmScroll";
 import { depthStyle } from "./depthStyles";
 
+import { useWindowSize } from "@uidotdev/usehooks";
+
 interface Props {
   scroll: number;
 }
 
 const Blurb = ({ scroll }: Props) => {
+  const size = useWindowSize();
+
+  const blurbMainStyles: React.CSSProperties = {};
+
+  if (size.width !== null && size.width < 1000) {
+    const width = size.width / 2.5;
+    blurbMainStyles.width = `${width}px`;
+    blurbMainStyles.left = `calc(50% - ${width / 2}px)`;
+    blurbMainStyles.top = "10rem";
+    blurbMainStyles.transform = "translate(0, 0)";
+    blurbMainStyles.height = "fit-content";
+  }
+
   const grid1Style = {
     transform: "translate(-27.7rem, -2rem)",
   };
@@ -56,7 +71,7 @@ const Blurb = ({ scroll }: Props) => {
         <AsmScroll />
       </div>
       <div className="whole-screen" style={depthStyle(scroll, 1.5, 0)}>
-        <div className="blurb-main shadowed-container">
+        <div style={blurbMainStyles} className="blurb-main shadowed-container">
           <span className="my-name heading-text">
             Jasper Parker - Full Stack Developer
           </span>
@@ -66,7 +81,6 @@ const Blurb = ({ scroll }: Props) => {
             with expertise in Rust, C/C++, JS/TS, Haskell, and C#, I thrive in
             the diverse realm of programming.
           </p>
-          <br />
           <br />
           <div className="skills-icons">
             <LangIcon imgSrc="/icons/rust.svg" name="Rust" />

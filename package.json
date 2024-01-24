@@ -11,6 +11,8 @@
     "build-workers": "tsc ./src/engineWorker.ts --outDir ./public/"
   },
   "dependencies": {
+    "@monaco-editor/react": "^4.6.0",
+    "@uidotdev/usehooks": "^2.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-syntax-highlighter": "^15.5.0"

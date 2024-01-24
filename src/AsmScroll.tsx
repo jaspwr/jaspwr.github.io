@@ -79,8 +79,10 @@ const AsmScroll = memo(() => {
 
   return (
     <div className="asm-scroll bg-element">
-      <div className="asm-overlay"></div>
-      <pre style={textStyle}>{displayText.join("\n")}</pre>
+      <span className="asm-inner">
+        <div className="asm-overlay"></div>
+        <pre style={textStyle}>{displayText.join("\n")}</pre>
+      </span>
     </div>
   );
 });

@@ -2,7 +2,7 @@
   width: 1.5rem;
   height: 1.5rem;
   margin-right: -0.1rem;
-  filter: brightness(0);
+  filter: brightness(0) var(--icon-filter);
   opacity: 0.3;
   transition: opacity 0.5s ease-in-out;
 }
