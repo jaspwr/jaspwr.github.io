@@ -110,7 +110,7 @@ function App() {
           )))}
       <FakeScrollBar scroll={scroll} setHoldingScrollBar={setHoldingScrollBar} setScroll={setScroll} />
       <DarkModeToggle />
-      <ScrollIndicator scroll={scroll} />
+      <ScrollIndicator />
       <Blurb scroll={scroll} />
       <Projects scroll={scroll} setDemo={setShowingDemo} />
       <Contact scroll={scroll} />
