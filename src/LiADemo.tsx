@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import CodeMirror from '@uiw/react-codemirror';
-
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 import init, { wasm_compile } from "./liademo/lia";
 
@@ -24,7 +24,7 @@ env framed {
     \\blindtext
 }
 
-`
+`;
 
 const LiADemo = () => {
   let [lia, setLia] = React.useState(DEFAULT);
@@ -49,9 +49,9 @@ const LiADemo = () => {
         </div> */}
         <div className="lia-output">
           <div className="lia-demo-block">
-          {/* <SyntaxHighlighter language="tex" style={nord} wrapLines={true}>
-            {tex}
-          </SyntaxHighlighter> */}
+            <SyntaxHighlighter language="tex" style={nord} wrapLines={true}>
+              {tex}
+            </SyntaxHighlighter>
           </div>
         </div>
         <div className="lia-input">
