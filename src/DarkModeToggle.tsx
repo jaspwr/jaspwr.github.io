@@ -7,13 +7,13 @@ enum Mode {
 }
 
 const DarkModeToggle = () => {
-  let defaultMode = Mode.Light;
+  let defaultMode: Mode = Mode.Light;
 
-  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    defaultMode = Mode.Dark;
-  }
+  // if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  //   defaultMode = Mode.Dark;
+  // }
 
-  let [mode, setMode] = useState(defaultMode);
+  let [mode, setMode] = useState(defaultMode as Mode);
 
   const style = document.documentElement.style;
 

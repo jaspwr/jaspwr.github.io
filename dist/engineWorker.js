@@ -23,7 +23,6 @@ createModule().then((module) => {
 
   makeMoveInEngine = module.cwrap("WASM_make_move", null, ["string"]);
 
-  console.log("Engine loaded.");
   postMessage({ type: "engineLoaded" });
 });
 

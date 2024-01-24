@@ -71,5 +71,6 @@
   margin-top: -0.4rem;
   margin-left: 5rem;
   margin-right: 5rem;
+  color: var(--primary-text);
   font-family: "BondiModa-VariableFont";
 }
