@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
-import init, { wasm_compile } from "./Liademo/lia";
+import init, { wasm_compile } from "./liademo/lia";
 
 import "./LiADemo.css";
 
