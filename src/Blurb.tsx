@@ -76,10 +76,9 @@ const Blurb = ({ scroll }: Props) => {
             Jasper Parker - Full Stack Developer
           </span>
           <p className="blurb-subtext">
-            Welcome to my digital space! I'm Jasper Parker, a dynamic full-stack
-            developer with a passion for crafting innovative solutions. Armed
-            with expertise in Rust, C/C++, JS/TS, Haskell, and C#, I thrive in
-            the diverse realm of programming.
+            A detail oriented and self-motivated programmer with a passion for
+            creating and learning and several years of full-stack experience in
+            freelance work and open source development
           </p>
           <br />
           <div className="skills-icons">
