@@ -68,7 +68,7 @@ const Projects = ({ scroll, setDemo }: Props) => {
               </span>
             }
             image="previews/gpu.png"
-            githubLink="https://github.com/jaspwr/meowcc"
+            githubLink="https://github.com/jaspwr/gpucc"
             description="A prototype C compiler written in GLSL compute shaders that compiles a subset of C to x86_64 assembly."
             lang={
               <span className="double-lang-icons">
