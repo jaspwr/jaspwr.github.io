@@ -5,7 +5,6 @@ import { useWindowSize } from "@uidotdev/usehooks";
 const ScrollIndicator = () => {
   const size = useWindowSize();
 
-  console.log(size.width);
   if (size.width !== null) {
     document.documentElement.style.setProperty(
       "--bg-element-opacity",

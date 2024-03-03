@@ -36,7 +36,7 @@ const Contact = ({ scroll }: Props) => {
           <img className="star" src="/decor/star.svg" />
         </div>
         <div className="contact-subtext">
-          Want to lock in? Contact me at any of the following. Hope to hear from
+          Want to reach out? Contact me at any of the following. Hope to hear from
           you soon!
         </div>
         <div className="cont-details-container">

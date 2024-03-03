@@ -7,7 +7,7 @@ enum Mode {
 }
 
 const DarkModeToggle = () => {
-  let defaultMode: Mode = Mode.Light;
+  let defaultMode: Mode = Mode.Dark;
 
   // if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
   //   defaultMode = Mode.Dark;

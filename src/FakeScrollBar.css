@@ -1,3 +1,4 @@
+
 .scroll-bar-container {
   position: absolute;
   top: 50%;
@@ -5,7 +6,7 @@
   height: 60%;
   width: 0.7rem;
   transform: translate(-1.8rem, -60%);
-  background-color: rgba(0, 0, 0, 0.295);
+  background-color: rgba(0, 0, 0, 0.295) !important;
   opacity: 0.4;
   transition: opacity 0.5s ease-in-out;
   padding: 0.3rem;
@@ -18,8 +19,9 @@
 }
 
 .scroll-bar {
+  --darkreader-bg--primary-text: var(--primary-text) !important;
   border-radius: 0.6rem;
-  background-color: var(--primary-text);
+  background-color: var(--primary-text) !important;
   width: 100%;
   height: 30%;
 }

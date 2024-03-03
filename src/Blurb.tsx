@@ -18,60 +18,35 @@ const Blurb = ({ scroll }: Props) => {
     const width = size.width / 2.5;
     blurbMainStyles.width = `${width}px`;
     blurbMainStyles.left = `calc(50% - ${width / 2}px)`;
-    blurbMainStyles.top = "10rem";
+    blurbMainStyles.top = "15rem";
     blurbMainStyles.transform = "translate(0, 0)";
     blurbMainStyles.height = "fit-content";
   }
 
-  const grid1Style = {
-    transform: "translate(-27.7rem, -2rem)",
-  };
-
-  const grid2Style = {
-    transform: "translate(9.3rem, -14.5rem)",
-  };
-
-  const star1Style = {
-    transform: "translate(-25rem, -12rem)",
-  };
-
-  const star2Style = {
-    transform: "translate(25rem, 6rem)",
-  };
-
-  const starAnimationDelay = {
-    animationDelay: "0.5s",
-  };
+  // const grid1Style = {
+  //   transform: "translate(-27.7rem, -2rem)",
+  // };
+  //
+  // const grid2Style = {
+  //   transform: "translate(9.3rem, -14.5rem)",
+  // };
+  //
+  // const star1Style = {
+  //   transform: "translate(-25rem, -12rem)",
+  // };
+  //
+  // const star2Style = {
+  //   transform: "translate(25rem, 6rem)",
+  // };
+  //
+  // const starAnimationDelay = {
+  //   animationDelay: "0.5s",
+  // };
 
   return (
     <>
-      <div className="whole-screen" style={depthStyle(scroll, 1.4, 0)}>
-        <div style={star1Style} className="bg-element">
-          <img className="star" src="/decor/star.svg" />
-        </div>
-        <div style={star2Style} className="bg-element">
-          <img
-            className="star"
-            style={starAnimationDelay}
-            src="/decor/star.svg"
-          />
-        </div>
-      </div>
-      <div className="whole-screen" style={depthStyle(scroll, 1.3, 0)}>
-        <img
-          className="grid bg-element"
-          style={grid1Style}
-          src="/decor/grid_s.svg"
-        />
-        <img
-          className="grid bg-element"
-          style={grid2Style}
-          src="/decor/grid_l.svg"
-        />
-        <AsmScroll />
-      </div>
       <div className="whole-screen" style={depthStyle(scroll, 1.5, 0)}>
-        <div style={blurbMainStyles} className="blurb-main shadowed-container">
+        <div style={blurbMainStyles} className="blurb-main">
           <span className="my-name heading-text">
             Jasper Parker - Full Stack Developer
           </span>
@@ -80,7 +55,7 @@ const Blurb = ({ scroll }: Props) => {
             creating and learning and several years of full-stack experience in
             freelance work and open source development.
           </p>
-          <br />
+          <span className="skills-title">Some technologies I'm familiar with include:</span>
           <div className="skills-icons">
             <LangIcon imgSrc="/icons/rust.svg" name="Rust" />
             <LangIcon imgSrc="/icons/react.svg" name="React" />

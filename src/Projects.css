@@ -3,14 +3,22 @@
     top: 50%;
     left: 50%;
     width: 70%;
-    max-width: 60rem;
-    display: flex;
-    flex-wrap: wrap;
+    max-width: 60%;
+    overflow-x: scroll;
     transform: translate(-50%, -14rem);
+    
 }
 
+.projects-previews-inner {
+    width: 80rem;
+    height: 31rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
 .projects-title {
-  transform: translate(-24rem, -22rem);
+  transform: translate(-27rem, -24rem);
   font-size: 6rem !important;
 }
 

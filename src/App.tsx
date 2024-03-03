@@ -10,8 +10,33 @@ import Demo from "./Demo";
 import Contact from "./Contact";
 import LiADemo from "./LiADemo";
 import ScrollIndicator from "./ScrollIndicator";
+import LilacDemo from "./LilacDemo";
 
-const scrollVelocity: { v: number } = { v: 0 };
+let scrollTarget = 0;
+let scroll_ = 0;
+let hasScrolled = false;
+
+const up = () => {
+  scrollTarget -= 0.5;
+  scrollTarget = Math.max(0, scrollTarget);
+  scrollTarget = Math.min(1, scrollTarget);
+}
+
+const down = () => {
+  scrollTarget += 0.5;
+  scrollTarget = Math.max(0, scrollTarget);
+  scrollTarget = Math.min(1, scrollTarget);
+}
+
+const setToClosest = () => {
+  if (scroll_ < 0.25) {
+    scrollTarget = 0;
+  } else if (scroll_ < 0.75) {
+    scrollTarget = 0.5;
+  } else {
+    scrollTarget = 1;
+  }
+}
 
 const lerp = (a: number, b: number, t: number) => {
   return a + (b - a) * t;
@@ -23,67 +48,93 @@ function App() {
   const [showingDemo, setShowingDemo] = useState("none");
 
   useEffect(() => {
-    if (showingDemo !== "none") return () => {};
+    if (showingDemo !== "none") return () => { };
 
     // TODO: rewrite this whole thing
 
     const handleWheel = (e: WheelEvent) => {
-      console.log(e.deltaY);
-      scrollVelocity.v = Math.sign(e.deltaY) * 0.035;
-      console.log(scrollVelocity);
+      if (holdingScrollBar) return;
+      if (Math.abs(scroll_ - scrollTarget) > 0.15) return;
+      if (Math.abs(e.deltaY) < Math.abs(e.deltaX)) return;
+
+      if (e.deltaY < 0) {
+        up();
+      } else {
+        down();
+      }
+    };
+
+    const touchStart = { x: 0, y: 0 };
+    let handledTouch = false;
+
+    const handleTouchStart = (e: TouchEvent) => {
+      if (e.touches.length !== 1) return;
+
+      touchStart.x = e.touches[0].clientX;
+      touchStart.y = e.touches[0].clientY;
+      handledTouch = true;
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches.length !== 1) return;
+      if (!handledTouch) return;
+
+      const diffY = e.touches[0].clientY - touchStart.y;
+      const diffX = e.touches[0].clientX - touchStart.x;
+
+      if (Math.abs(diffY) < Math.abs(diffX)) return;
+
+      if (diffY < 0) {
+        up();
+      } else {
+        down();
+      }
+
+      handledTouch = false;
     };
 
     const interval = window.setInterval(() => {
-      if (Math.abs(scrollVelocity.v) < 0.005) {
-        scrollVelocity.v = 0;
+      if (holdingScrollBar) {
+        hasScrolled = true;
+        return;
       }
 
-      if (scrollVelocity.v === 0) return;
+      if (!hasScrolled) {
+        if (scroll_ === scrollTarget) return;
+      }
 
-      scrollVelocity.v = lerp(scrollVelocity.v, 0, 0.1);
+      requestAnimationFrame(() => {
 
-      setScroll((prev) => {
-        const newScroll = prev + scrollVelocity.v;
-        if (newScroll < 0 || newScroll > 1) {
-          scrollVelocity.v = 0;
-        }
-        return Math.min(Math.max(newScroll, 0), 1);
+        setScroll((prev) => {
+          scroll_ = prev;
+
+          scroll_ = lerp(scroll_, scrollTarget, 0.1);
+
+          if (Math.abs(scroll_ - scrollTarget) < 0.001) {
+            scroll_ = scrollTarget;
+          }
+
+          if (hasScrolled) {
+            hasScrolled = false;
+            setToClosest();
+          }
+
+          return scroll_;
+        });
       });
     }, 1000 / 30);
 
     window.addEventListener("wheel", handleWheel);
+    window.addEventListener("touchstart", handleTouchStart);
+    window.addEventListener("touchmove", handleTouchMove);
 
     return () => {
       window.removeEventListener("wheel", handleWheel);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchstart", handleTouchStart);
       window.clearInterval(interval);
     };
-  }, [showingDemo]);
-
-  useEffect(() => {
-    if (showingDemo !== "none") return () => {};
-    if (holdingScrollBar) return () => {};
-
-    const interval = window.setInterval(() => {
-      if (scroll !== 0 && scroll !== 0.5 && scroll !== 1) {
-        setScroll((prev) => {
-          if (prev < 0.25) {
-            return lerp(prev, 0, 0.17);
-          } else if (prev < 0.75) {
-            if (scrollVelocity.v === 0 && Math.abs(prev - 0.5) < 0.005) {
-              return 0.5;
-            }
-            return lerp(prev, 0.5, 0.17);
-          } else {
-            return lerp(prev, 1, 0.17);
-          }
-        });
-      }
-    }, 1000 / 30);
-
-    return () => {
-      window.clearInterval(interval);
-    };
-  }, [scroll, showingDemo, holdingScrollBar]);
+  }, [showingDemo, holdingScrollBar]);
 
   return (
     <>
@@ -107,7 +158,18 @@ function App() {
             >
               <LiADemo />
             </Demo>
-          )))}
+          )) ||
+          (showingDemo === "lilac" && (
+            <Demo
+              title="Lilac live WASM demo"
+              close={() => {
+                setShowingDemo("none");
+              }}
+            >
+              <LilacDemo />
+            </Demo>
+          ))
+        )}
       <FakeScrollBar scroll={scroll} setHoldingScrollBar={setHoldingScrollBar} setScroll={setScroll} />
       <DarkModeToggle />
       <ScrollIndicator />

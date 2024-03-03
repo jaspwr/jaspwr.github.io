@@ -35,9 +35,9 @@
   gap: 0px 0px;
   grid-auto-flow: row;
   grid-template-areas:
-    "cont-gh-icon cont-gh-link"
     "cont-email-icon cont-email-email"
     "cont-linkedin-icon cont-linkedin-link"
+    "cont-gh-icon cont-gh-link"
     "cont-ph-icon cont-ph-number";
 }
 

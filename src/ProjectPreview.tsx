@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import "./ProjectPreview.css";
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
   buttonBrightness?: string;
 }
 
-const ProjectPreview = (props: Props) => {
+const ProjectPreview = memo((props: Props) => {
   const image = (
     <div
       className={`image clickable-image`}
@@ -48,6 +48,6 @@ const ProjectPreview = (props: Props) => {
       <div className="lang">{props.lang}</div>
     </div>
   );
-};
+});
 
 export default ProjectPreview;
