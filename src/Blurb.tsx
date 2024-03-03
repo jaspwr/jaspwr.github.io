@@ -1,6 +1,6 @@
 import LangIcon from "./LangIcon";
 import "./Blurb.css";
-import AsmScroll from "./AsmScroll";
+// import AsmScroll from "./AsmScroll";
 import { depthStyle } from "./depthStyles";
 
 import { useWindowSize } from "@uidotdev/usehooks";

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Editor from "@monaco-editor/react";
 
-import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
+// import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 // import init, { wasm_compile } from "./lilacdemo/lilac";
 
@@ -62,11 +62,11 @@ const DEFAULT: string = `
 
 const LilacDemo = () => {
   let [lilac, setlilac] = React.useState(DEFAULT);
-  let [ready, setReady] = React.useState(false);
+  // let [ready, setReady] = React.useState(false);
 
   useEffect(() => {
     // init().then(() => {
-    setReady(true);
+    // setReady(true);
     // });
   }, []);
 
