@@ -3,7 +3,6 @@ import Editor from "@monaco-editor/react";
 
 // import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
-//@ts-ignore
 import init, { wasm_compile, new_file } from "./lilacdemo/lilac";
 
 import "./lilacDemo.css";

@@ -1,0 +1,14 @@
+{
+  "name": "lilac",
+  "version": "0.1.0",
+  "files": [
+    "lilac_bg.wasm",
+    "lilac.js",
+    "lilac.d.ts"
+  ],
+  "module": "lilac.js",
+  "types": "lilac.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
