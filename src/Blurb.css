@@ -6,10 +6,12 @@
     top: 50%;
     left: 50%;
     transform: translate(-20rem, -10rem);
-    color: var(--primary-text)
+    color: var(--primary-text);
 }
 
 .blurb-subtext {
+    line-height: 1rem;
+    font-family: "BondiModa-VariableFont";
     margin: 0.4rem;
 }
 

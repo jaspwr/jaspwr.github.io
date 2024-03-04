@@ -13,14 +13,17 @@ const Blurb = ({ scroll }: Props) => {
   const size = useWindowSize();
 
   const blurbMainStyles: React.CSSProperties = {};
+  const titleStyles: React.CSSProperties = {};
 
   if (size.width !== null && size.width < 1000) {
     const width = size.width / 2.5;
     blurbMainStyles.width = `${width}px`;
     blurbMainStyles.left = `calc(50% - ${width / 2}px)`;
-    blurbMainStyles.top = "15rem";
+    blurbMainStyles.top = "calc(50% - 15rem)";
     blurbMainStyles.transform = "translate(0, 0)";
     blurbMainStyles.height = "fit-content";
+    titleStyles.fontSize = "1.5rem";
+    titleStyles.lineHeight = "1.9rem";
   }
 
   // const grid1Style = {
@@ -47,7 +50,7 @@ const Blurb = ({ scroll }: Props) => {
     <>
       <div className="whole-screen" style={depthStyle(scroll, 1.5, 0)}>
         <div style={blurbMainStyles} className="blurb-main">
-          <span className="my-name heading-text">
+          <span className="my-name heading-text" style={titleStyles}>
             Jasper Parker - Full Stack Developer
           </span>
           <p className="blurb-subtext">

@@ -82,6 +82,18 @@ const Projects = ({ scroll, setDemo }: Props) => {
               }
             />
             <ProjectPreview
+              title={<span id="bd-title">BetterDiscord plugins</span>}
+              image="https://raw.githubusercontent.com/jaspwr/BDPlugins/main/BetterAudioPlayer/img/dark.gif"
+              githubLink="https://github.com/jaspwr/BDPlugins"
+              description="Some plugins I've made for the BetterDiscord client."
+              lang={
+                <span className="double-lang-icons">
+                  <LangIcon imgSrc="/icons/js.svg" name="Javascript" />
+                  <LangIcon imgSrc="/icons/react.svg" name="React" />
+                </span>
+              }
+            />
+            <ProjectPreview
               title={<img id="lia-logo" src="icons/lia.png" alt="LiA" />}
               image="previews/lia.png"
               githubLink="https://github.com/jaspwr/LiA"
@@ -101,14 +113,17 @@ const Projects = ({ scroll, setDemo }: Props) => {
               lang={<LangIcon name="Rust" imgSrc="icons/rust.svg" />}
             />
             <ProjectPreview
-              title={<span id="bd-title">BetterDiscord plugins</span>}
-              image="https://raw.githubusercontent.com/jaspwr/BDPlugins/main/BetterAudioPlayer/img/dark.gif"
-              githubLink="https://github.com/jaspwr/BDPlugins"
-              description="Some plugins I've made for the BetterDiscord client."
+              title="lilac"
+              image="previews/lilac.png"
+              githubLink="https://github.com/jaspwr/lilac"
+              description="A transpiled frontend web meta-framework."
+              clickAction={() => {
+                setDemo("lilac");
+              }}
               lang={
                 <span className="double-lang-icons">
+                  <LangIcon name="Rust" imgSrc="icons/rust.svg" />
                   <LangIcon imgSrc="/icons/js.svg" name="Javascript" />
-                  <LangIcon imgSrc="/icons/react.svg" name="React" />
                 </span>
               }
             />
@@ -121,21 +136,6 @@ const Projects = ({ scroll, setDemo }: Props) => {
                 <span className="double-lang-icons">
                   <LangIcon name="Typescript" imgSrc="icons/ts.svg" />
                   <LangIcon imgSrc="/icons/svelte.svg" name="Svelte" />
-                </span>
-              }
-            />
-            <ProjectPreview
-              title="lilac"
-              image="previews/lilac.png"
-              githubLink="https://github.com/jaspwr/lilac"
-              description="A transpiled frontend web meta-framework."
-              clickAction={() => {
-                setDemo("lilac");
-              }}
-              lang={
-                <span className="double-lang-icons">
-                  <LangIcon name="Rust" imgSrc="icons/rust.svg" />
-                  <LangIcon imgSrc="/icons/js.svg" name="Javascript" />
                 </span>
               }
             />

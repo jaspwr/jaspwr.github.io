@@ -84,7 +84,7 @@ function App() {
 
       if (Math.abs(diffY) < Math.abs(diffX)) return;
 
-      if (diffY < 0) {
+      if (diffY > 0) {
         up();
       } else {
         down();

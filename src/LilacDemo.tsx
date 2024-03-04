@@ -3,15 +3,14 @@ import Editor from "@monaco-editor/react";
 
 // import { nord } from "react-syntax-highlighter/dist/esm/styles/prism";
 
-// import init, { wasm_compile } from "./lilacdemo/lilac";
+import init, { wasm_compile, new_file } from "./lilacdemo/lilac";
 
 import "./lilacDemo.css";
 
-const DEFAULT: string = `
-<script>
+const ROOT_DEFAULT: string = `<script>
     let text = state("");
 
-    const list = lstate([[123, "hi"], [123123, "h"]]);
+    const list = lstate([]);
 
     let key = 0;
 
@@ -29,7 +28,7 @@ const DEFAULT: string = `
 </script>
 
 <marquee id="bl" class="blue-text">
-    TODOOOOOOOO LIIIIISSSTTTTTT	
+  Todo List.
 </marquee>
 
 <div>
@@ -37,7 +36,7 @@ const DEFAULT: string = `
 </div>
 
 <input id="input" type="text" bind={text}/>
-<button onclick={add}>Click Me!</button>
+<button onclick={add}>Add to list.</button>
 
 <ul>
 {#for i in $lstate list}
@@ -60,18 +59,50 @@ const DEFAULT: string = `
 </style>
 `;
 
+const LIST_ITEM_DEFAULT: string = `<script>
+    const done = state(false);
+</script>
+
+<li>
+    <input type="checkbox" bind={done}/> 
+    <span style={$done ? "text-decoration: line-through;" : ""}>
+	{props.name}
+	<button onclick={props.delete}>delete</button>
+    </span>
+</li>
+`;
+
+type File = {
+  name: string;
+  content: string;
+};
+
 const LilacDemo = () => {
-  let [lilac, setlilac] = React.useState(DEFAULT);
-  // let [ready, setReady] = React.useState(false);
+  let [files, setFiles] = React.useState([{ name: "Root", content: ROOT_DEFAULT }, { name: "ListItem", content: LIST_ITEM_DEFAULT }] as File[]);
+  let [selectedFile, setSelectedFile] = React.useState("Root");
+  let [ready, setReady] = React.useState(false);
 
   useEffect(() => {
-    // init().then(() => {
-    // setReady(true);
-    // });
+    init().then(() => {
+      setReady(true);
+    });
   }, []);
 
   // const tex = ready ? wasm_compile(lilac) : "Loading compiler...";
-  const html = "<i>Loading compiler...</li>";
+  const html = ready ? wasm_compile(files.map(f => new_file(f.name, f.content))) : "<i>Loading compiler...</li>";
+
+  const tabs = files.map((file) => {
+    return (
+      <span
+        key={file.name}
+        className={`lilac-tab ${selectedFile === file.name ? "lilac-tab-selected" : ""}`}
+        onClick={() => setSelectedFile(file.name)}
+      >
+        {file.name}
+      </span>
+    );
+  });
+
 
   return (
     <>
@@ -79,16 +110,25 @@ const LilacDemo = () => {
         <div className="lilac-output">
           <iframe
             srcDoc={html}
-            title="Lilac output" />
+          />
         </div>
         <div className="lilac-input">
+          <div className="lilac-tabs">{tabs}</div>
           <Editor
             language="html"
             theme="vs-dark"
-            value={lilac}
+            value={files.find((file) => file.name === selectedFile)?.content || ""}
             onChange={(e) => {
               if (e === undefined) return;
-              setlilac(e);
+
+              const newFiles = files.map((file) => {
+                if (file.name === selectedFile) {
+                  return { name: file.name, content: e };
+                }
+                return file;
+              });
+
+              setFiles(newFiles);
             }}
           />
           {/* <textarea

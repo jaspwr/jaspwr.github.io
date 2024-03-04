@@ -90,6 +90,7 @@
     text-decoration: none;
     color: var(--primary-text);
     transition: color 0.2s ease-in-out;
+    word-wrap: break-word;
 }
 
 .cont-link a:hover {
