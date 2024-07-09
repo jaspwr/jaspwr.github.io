@@ -23,7 +23,7 @@ body {
   --secondary-background: #5f5f5f;
   --clickable-hover: #075396;
   --icon-filter: invert(0);
-  --shadow-colour: rgba(0, 0, 0, 0.15);
+  --shadow-colour: rgba(0, 0, 0, 0.50);
   overflow: hidden;
 }
 

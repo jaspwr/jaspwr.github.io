@@ -23,7 +23,7 @@ const DarkModeToggle = () => {
     style.setProperty("--primary-background", "#fff");
     style.setProperty("--secondary-background", "#5f5f5f");
     style.setProperty("--icon-filter", "invert(0)");
-    style.setProperty("--shadow-colour", "rgba(0, 0, 0, 0.15)");
+    style.setProperty("--shadow-colour", "rgba(0, 0, 0, 0.24)");
   } else if (mode === Mode.Dark) {
     style.setProperty("--primary-text", "#fff");
     style.setProperty("--secondary-text", "#1f1e29");

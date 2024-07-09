@@ -1,0 +1,8 @@
+.close-link {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.close-link:hover {
+  color: #7e7e7e;
+}

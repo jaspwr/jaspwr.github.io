@@ -72,7 +72,6 @@ const Blurb = ({ scroll }: Props) => {
             <LangIcon imgSrc="/icons/jl.svg" name="Julia" />
             <LangIcon imgSrc="/icons/haskell.svg" name="Haskell" />
             <LangIcon imgSrc="/icons/cs.svg" name="C#" />
-            <LangIcon imgSrc="/icons/tf.svg" name="Tensorflow" />
             <LangIcon imgSrc="/icons/svelte.svg" name="Svelte" />
             <LangIcon imgSrc="/icons/git.svg" name="Git" />
             <LangIcon imgSrc="/icons/linux.svg" name="GNU/Linux" />

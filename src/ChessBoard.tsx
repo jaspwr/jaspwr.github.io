@@ -628,7 +628,6 @@ const ChessBoard = () => {
       }
 
       const moveNotation = e.data;
-      console.log(moveNotation);
 
       const move = NotationToMove(moveNotation);
 
@@ -676,7 +675,6 @@ const ChessBoard = () => {
       movePiece(gs, move, true);
       render(ctx, gs, undefined, undefined);
 
-      console.log(moveToNotation(move));
       engineWorker.postMessage({
         type: "genMove",
         move: moveToNotation(move),
@@ -761,7 +759,6 @@ const ChessBoard = () => {
       board.removeEventListener("mousedown", handleMouseDown);
       board.removeEventListener("mouseout", handleMouseOut);
       board.removeEventListener("mousemove", handleMouseMove);
-      console.log("Cleaned up chess board");
     };
   }, [playAsBlack]);
 

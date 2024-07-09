@@ -81,7 +81,7 @@ const Projects = ({ scroll, setDemo }: Props) => {
                 </span>
               }
             />
-            <ProjectPreview
+            {/*<ProjectPreview
               title={<span id="bd-title">BetterDiscord plugins</span>}
               image="https://raw.githubusercontent.com/jaspwr/BDPlugins/main/BetterAudioPlayer/img/dark.gif"
               githubLink="https://github.com/jaspwr/BDPlugins"
@@ -92,7 +92,7 @@ const Projects = ({ scroll, setDemo }: Props) => {
                   <LangIcon imgSrc="/icons/react.svg" name="React" />
                 </span>
               }
-            />
+            />*/}
             <ProjectPreview
               title={<img id="lia-logo" src="icons/lia.png" alt="LiA" />}
               image="previews/lia.png"
@@ -127,7 +127,7 @@ const Projects = ({ scroll, setDemo }: Props) => {
                 </span>
               }
             />
-            <ProjectPreview
+            {/*<ProjectPreview
               title={<span id="bd-title">obsidian-org-agenda</span>}
               image="previews/obsorg.png"
               githubLink="https://github.com/jaspwr/obsidian-org-agenda"
@@ -138,7 +138,7 @@ const Projects = ({ scroll, setDemo }: Props) => {
                   <LangIcon imgSrc="/icons/svelte.svg" name="Svelte" />
                 </span>
               }
-            />
+            />*/}
           </div>
         </div>
       </div>
