@@ -43,7 +43,7 @@ const DarkModeToggle = () => {
 
   return (
     <div className="darkmode-toggle" onClick={toggle}>
-      Toggle {mode === Mode.Light ? "Dark" : "Light"} Mode
+      <img src={mode === Mode.Light ? "icons/moon.svg" : "icons/sun.svg"} alt="Dark mode toggle" />
     </div>
   );
 };
