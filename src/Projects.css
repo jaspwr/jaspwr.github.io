@@ -6,11 +6,11 @@
     max-width: 60%;
     overflow-x: scroll;
     transform: translate(-50%, -14rem);
-    
+
 }
 
 .projects-previews-inner {
-    width: 60rem;
+    width: 80rem;
     height: 31rem;
     display: flex;
     flex-wrap: wrap;
