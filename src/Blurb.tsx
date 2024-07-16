@@ -54,7 +54,7 @@ const Blurb = ({ scroll }: Props) => {
             Jasper Parker - Full Stack Developer
           </span>
           <p className="blurb-subtext">
-            A detail oriented and self-motivated programmer with a passion for
+            A proficient and self-motivated programmer with a passion for
             creating and learning and several years of full-stack experience in
             freelance work and open source development.
           </p>
