@@ -51,17 +51,23 @@ function App() {
     if (showingDemo !== "none") return () => { };
 
     // TODO: rewrite this whole thing
+    
+    let last_scroll = Date.now();
 
     const handleWheel = (e: WheelEvent) => {
       if (holdingScrollBar) return;
       if (Math.abs(scroll_ - scrollTarget) > 0.15) return;
       if (Math.abs(e.deltaY) < Math.abs(e.deltaX)) return;
 
+      if (last_scroll + 1000 > Date.now()) return;
+
       if (e.deltaY < 0) {
         up();
       } else {
         down();
       }
+
+      last_scroll = Date.now();
     };
 
     const touchStart = { x: 0, y: 0 };
