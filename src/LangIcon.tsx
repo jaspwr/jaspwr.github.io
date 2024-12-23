@@ -5,10 +5,15 @@ import Tooltip from "./Tooltip";
 interface Props {
   name: string;
   imgSrc: string;
+  hasToolTip?: boolean;
 }
 
-const LangIcon = memo(({ name, imgSrc }: Props) => {
+const LangIcon = memo(({ name, imgSrc, hasToolTip }: Props) => {
   let [showTooltip, setShowTooltip] = React.useState(false);
+
+  if (hasToolTip === undefined) {
+    hasToolTip = true;
+  }
 
   const handleMouseEnter = () => {
     setShowTooltip(true);
@@ -23,9 +28,12 @@ const LangIcon = memo(({ name, imgSrc }: Props) => {
       <span onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         <img className="lang-icon" src={imgSrc} alt={name} />
       </span>
-      <Tooltip show={showTooltip}>
-        <div className="tooltip">{name}</div>
-      </Tooltip>
+      {hasToolTip ?
+        <Tooltip show={showTooltip}>
+          {name}
+        </Tooltip>
+        : null
+      }
     </>
   );
 });

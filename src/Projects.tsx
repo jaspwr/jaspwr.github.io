@@ -50,7 +50,7 @@ const Projects = ({ scroll, setDemo }: Props) => {
               image="previews/glimpse.png"
               githubLink="https://github.com/jaspwr/glimpse"
               description="A simple GTK3 launcher/file search engine for GNU/Linux. Instantly searches files and installed applications."
-              lang={<LangIcon name="Rust" imgSrc="icons/rust.svg" />}
+              lang={<LangIcon hasToolTip={false} name="Rust" imgSrc="icons/rust.svg" />}
             />
             <ProjectPreview
               title="Chess Engine"
@@ -60,7 +60,7 @@ const Projects = ({ scroll, setDemo }: Props) => {
               clickAction={() => {
                 setDemo("chess");
               }}
-              lang={<LangIcon name="C" imgSrc="icons/c.svg" />}
+              lang={<LangIcon hasToolTip={false} name="C" imgSrc="icons/c.svg" />}
             />
             <ProjectPreview
               title={
@@ -75,9 +75,9 @@ const Projects = ({ scroll, setDemo }: Props) => {
               lang={
                 <span className="double-lang-icons">
                   <span className="opengl-icon">
-                    <LangIcon name="OpenGL" imgSrc="icons/gl.svg" />
+                    <LangIcon hasToolTip={false} name="OpenGL" imgSrc="icons/gl.svg" />
                   </span>
-                  <LangIcon name="C++" imgSrc="icons/cpp.svg" />
+                  <LangIcon hasToolTip={false} name="C++" imgSrc="icons/cpp.svg" />
                 </span>
               }
             />
@@ -88,8 +88,8 @@ const Projects = ({ scroll, setDemo }: Props) => {
               description="Some plugins I've made for the BetterDiscord client."
               lang={
                 <span className="double-lang-icons">
-                  <LangIcon imgSrc="/icons/js.svg" name="Javascript" />
-                  <LangIcon imgSrc="/icons/react.svg" name="React" />
+                  <LangIcon hasToolTip={false} imgSrc="/icons/js.svg" name="Javascript" />
+                  <LangIcon hasToolTip={false} imgSrc="/icons/react.svg" name="React" />
                 </span>
               }
             />
@@ -102,7 +102,7 @@ const Projects = ({ scroll, setDemo }: Props) => {
               clickAction={() => {
                 setDemo("lia");
               }}
-              lang={<LangIcon name="Rust" imgSrc="icons/rust.svg" />}
+              lang={<LangIcon hasToolTip={false} name="Rust" imgSrc="icons/rust.svg" />}
               buttonBrightness="2.2"
             />
             <ProjectPreview
@@ -110,7 +110,7 @@ const Projects = ({ scroll, setDemo }: Props) => {
               image="previews/volapp.webp"
               githubLink="https://github.com/jaspwr/vol-applet"
               description="A simple GTK system tray volume controller applet for PulseAudio."
-              lang={<LangIcon name="Rust" imgSrc="icons/rust.svg" />}
+              lang={<LangIcon hasToolTip={false} name="Rust" imgSrc="icons/rust.svg" />}
             />
             <ProjectPreview
               title="lilac"
@@ -122,8 +122,8 @@ const Projects = ({ scroll, setDemo }: Props) => {
               }}
               lang={
                 <span className="double-lang-icons">
-                  <LangIcon name="Rust" imgSrc="icons/rust.svg" />
-                  <LangIcon imgSrc="/icons/js.svg" name="Javascript" />
+                  <LangIcon hasToolTip={false} name="Rust" imgSrc="icons/rust.svg" />
+                  <LangIcon hasToolTip={false} imgSrc="/icons/js.svg" name="Javascript" />
                 </span>
               }
             />
@@ -134,8 +134,8 @@ const Projects = ({ scroll, setDemo }: Props) => {
               description="A plugin for the Obsidian note taking app that adds an org-mode style agenda view."
               lang={
                 <span className="double-lang-icons">
-                  <LangIcon name="Typescript" imgSrc="icons/ts.svg" />
-                  <LangIcon imgSrc="/icons/svelte.svg" name="Svelte" />
+                  <LangIcon hasToolTip={false} name="Typescript" imgSrc="icons/ts.svg" />
+                  <LangIcon hasToolTip={false} imgSrc="/icons/svelte.svg" name="Svelte" />
                 </span>
               }
             />

@@ -14,7 +14,9 @@ const Tooltip = ({ show, children }: Props) => {
 
   return (
     <div className="tooltip-container" style={styles}>
-      {children}
+      <div className="tooltip">
+        {children}
+      </div>
     </div>
   );
 };
