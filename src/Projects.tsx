@@ -94,15 +94,23 @@ const Projects = ({ scroll, setDemo }: Props) => {
               }
             />
             <ProjectPreview
-              title={<img id="lia-logo" src="icons/lia.png" alt="LiA" />}
-              image="previews/lia.png"
-              githubLink="https://github.com/jaspwr/LiA"
+              title="DAW"
+              image="previews/daw.png"
+              githubLink="https://github.com/jaspwr/daw"
               description="
-            A transpiled superset of TeX for writing LaTeX  designed to make LaTeX code less verbose and faster to write."
+              A work in progress digital audio workstation with Vim inspired keyboard shortcuts."
+              buttonText="More info"
               clickAction={() => {
-                setDemo("lia");
+                setDemo("daw");
               }}
-              lang={<LangIcon hasToolTip={false} name="Rust" imgSrc="icons/rust.svg" />}
+              lang={
+                <span className="double-lang-icons">
+                  <span className="opengl-icon">
+                    <LangIcon hasToolTip={false} name="OpenGL" imgSrc="icons/gl.svg" />
+                  </span>
+                  <LangIcon hasToolTip={false} name="Rust" imgSrc="icons/rust.svg" />
+                </span>
+              }
               buttonBrightness="2.2"
             />
             <ProjectPreview
@@ -128,16 +136,16 @@ const Projects = ({ scroll, setDemo }: Props) => {
               }
             />
             <ProjectPreview
-              title={<span id="bd-title">obsidian-org-agenda</span>}
-              image="previews/obsorg.png"
-              githubLink="https://github.com/jaspwr/obsidian-org-agenda"
-              description="A plugin for the Obsidian note taking app that adds an org-mode style agenda view."
-              lang={
-                <span className="double-lang-icons">
-                  <LangIcon hasToolTip={false} name="Typescript" imgSrc="icons/ts.svg" />
-                  <LangIcon hasToolTip={false} imgSrc="/icons/svelte.svg" name="Svelte" />
-                </span>
-              }
+              title={<img id="lia-logo" src="icons/lia.png" alt="LiA" />}
+              image="previews/lia.png"
+              githubLink="https://github.com/jaspwr/LiA"
+              description="
+            A transpiled superset of TeX for writing LaTeX  designed to make LaTeX code less verbose and faster to write."
+              clickAction={() => {
+                setDemo("lia");
+              }}
+              lang={<LangIcon hasToolTip={false} name="Rust" imgSrc="icons/rust.svg" />}
+              buttonBrightness="2.2"
             />
           </div>
         </div>

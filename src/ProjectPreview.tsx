@@ -9,6 +9,7 @@ interface Props {
   githubLink: string;
   clickAction?: () => void;
   buttonBrightness?: string;
+  buttonText?: string;
 }
 
 const ProjectPreview = memo((props: Props) => {
@@ -37,7 +38,7 @@ const ProjectPreview = memo((props: Props) => {
             <>
               {props.clickAction && (
                 <div onClick={props.clickAction} className="demo-button">
-                  Open live demo
+                  {props.buttonText ?? "Open live demo"}
                 </div>
               )}
             </>

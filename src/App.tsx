@@ -11,6 +11,7 @@ import Contact from "./Contact";
 import LiADemo from "./LiADemo";
 import ScrollIndicator from "./ScrollIndicator";
 import LilacDemo from "./LilacDemo";
+import DawInfo from "./DawInfo";
 
 let scrollTarget = 0;
 let scroll_ = 0;
@@ -173,6 +174,15 @@ function App() {
               }}
             >
               <LilacDemo />
+            </Demo>
+          )) || (showingDemo === "daw" && (
+            <Demo
+              title="DAW Info"
+              close={() => {
+                setShowingDemo("none");
+              }}
+            >
+              <DawInfo />
             </Demo>
           ))
         )}
