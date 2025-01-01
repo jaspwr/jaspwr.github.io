@@ -94,6 +94,13 @@ const Projects = ({ scroll, setDemo }: Props) => {
               }
             />
             <ProjectPreview
+              title="vol-applet"
+              image="previews/volapp.webp"
+              githubLink="https://github.com/jaspwr/vol-applet"
+              description="A simple GTK system tray volume controller applet for PulseAudio."
+              lang={<LangIcon hasToolTip={false} name="Rust" imgSrc="icons/rust.svg" />}
+            />
+            <ProjectPreview
               title="DAW"
               image="previews/daw.png"
               githubLink="https://github.com/jaspwr/daw"
@@ -114,11 +121,17 @@ const Projects = ({ scroll, setDemo }: Props) => {
               buttonBrightness="2.2"
             />
             <ProjectPreview
-              title="vol-applet"
-              image="previews/volapp.webp"
-              githubLink="https://github.com/jaspwr/vol-applet"
-              description="A simple GTK system tray volume controller applet for PulseAudio."
-              lang={<LangIcon hasToolTip={false} name="Rust" imgSrc="icons/rust.svg" />}
+              title="spectra"
+              image="previews/spectra.png"
+              githubLink="https://github.com/jaspwr/spectra"
+              description="
+            A WebGL shader live-coding environment for teaching and learning graphics programming."
+              clickAction={() => {
+                window.open("https://jaspwr.github.io/spectra/", "_blank");
+              }}
+              buttonText="Open in new tab"
+              lang={<LangIcon hasToolTip={false} imgSrc="/icons/ts.svg" name="Typescript" />}
+              buttonBrightness="2.2"
             />
             <ProjectPreview
               title="lilac"
