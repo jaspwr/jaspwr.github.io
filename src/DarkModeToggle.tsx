@@ -24,6 +24,8 @@ const DarkModeToggle = () => {
     style.setProperty("--secondary-background", "#5f5f5f");
     style.setProperty("--icon-filter", "invert(0)");
     style.setProperty("--shadow-colour", "rgba(0, 0, 0, 0.24)");
+    style.setProperty("--scroll-bar-inner", "rgba(255, 255, 255, 1)");
+    style.setProperty("--scroll-bar-outer", "rgba(0, 0, 0, 0.7)");
   } else if (mode === Mode.Dark) {
     style.setProperty("--primary-text", "#fff");
     style.setProperty("--secondary-text", "#1f1e29");
@@ -31,6 +33,8 @@ const DarkModeToggle = () => {
     style.setProperty("--secondary-background", "#AAA");
     style.setProperty("--icon-filter", "invert(1)");
     style.setProperty("--shadow-colour", "rgba(0, 0, 0, 0.65)");
+    style.setProperty("--scroll-bar-inner", "rgba(0, 0, 0, 1.0)");
+    style.setProperty("--scroll-bar-outer", "rgba(255, 255, 255, 0.8)");
   }
 
   const toggle = () => {

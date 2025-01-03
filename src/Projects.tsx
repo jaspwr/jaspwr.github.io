@@ -41,6 +41,9 @@ const Projects = ({ scroll, setDemo }: Props) => {
         <div style={starStyle} className="bg-element">
           <img className="star" src="/decor/star.svg" />
         </div>
+        <div className="subheader bg-element">
+          These are several personal solo projects I've worked on in my free time.
+        </div>
       </div>
       <div className="whole-screen" style={depthStyle(scroll, 1.7, 0.5)}>
         <div className="project-previews-container">

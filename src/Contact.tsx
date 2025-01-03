@@ -74,7 +74,7 @@ const Contact = ({ scroll }: Props) => {
           </div>
           <div className="cont-ph-icon"></div>
           <div className="cont-ph-number cont-link cont-link-no-hover">
-            <a>+614 5557 8889</a>
+            <a>+61 455578889</a>
           </div>
         </div>
       </div>

@@ -5,7 +5,7 @@
     width: 70%;
     max-width: 60%;
     overflow-x: scroll;
-    transform: translate(-50%, -14rem);
+    transform: translate(-50%, -13rem);
 
 }
 
@@ -16,10 +16,17 @@
     flex-wrap: wrap;
 }
 
-
 .projects-title {
   transform: translate(-27rem, -24rem);
   font-size: 6rem !important;
+}
+
+.subheader {
+    transform: translate(-28rem, -16rem);
+    font-size: 1.2rem !important;
+    z-index: 100;
+    color: var(--primary-text);
+    font-family: "BondiModa-VariableFont";
 }
 
 #gpu-compiler-title {

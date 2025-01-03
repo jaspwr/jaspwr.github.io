@@ -55,10 +55,10 @@ const Blurb = ({ scroll }: Props) => {
           </span>
           <p className="blurb-subtext">
             A proficient and self-motivated programmer with a passion for
-            creating and learning and several years of full-stack experience in
+            creating and learning with several years of full-stack experience in
             freelance work and open source development.
           </p>
-          <span className="skills-title">Some technologies I'm familiar with include:</span>
+          <span className="skills-title">Technologies I'm familiar with include:</span>
           <div className="skills-icons">
             <LangIcon imgSrc="/icons/rust.svg" name="Rust" />
             <LangIcon imgSrc="/icons/react.svg" name="React" />
