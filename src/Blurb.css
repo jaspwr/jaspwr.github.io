@@ -1,0 +1,24 @@
+.blurb-main {
+    width: 40rem;
+    height: 12rem;
+    padding: 1.5rem !important;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-20rem, -10rem);
+    color: var(--primary-text);
+}
+
+.blurb-subtext {
+    line-height: 1rem;
+    font-family: "BondiModa-VariableFont";
+    margin: 0.4rem;
+}
+
+.skills-title {
+    font-family: "DMSerifDisplay-Regular";
+}
+
+.skills-icons {
+    margin-top: 0.6rem;
+}

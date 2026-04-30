@@ -1,0 +1,14 @@
+{
+  "name": "lia",
+  "version": "0.3.2",
+  "files": [
+    "lia_bg.wasm",
+    "lia.js",
+    "lia.d.ts"
+  ],
+  "module": "lia.js",
+  "types": "lia.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}

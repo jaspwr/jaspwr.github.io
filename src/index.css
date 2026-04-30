@@ -1,0 +1,112 @@
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  background-color: var(--primary-background);
+}
+
+* {
+  transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out, box-shadow 0.5s ease-in-out, filter 0.5s ease-in-out;
+}
+
+:root {
+  --primary-text: #000;
+  --primary-background: #fff;
+  --secondary-text: #fff;
+  --secondary-background: #5f5f5f;
+  --clickable-hover: #075396;
+  --icon-filter: invert(0);
+  --shadow-colour: rgba(0, 0, 0, 0.50);
+  overflow: hidden;
+}
+
+.shadowed-container {
+  box-shadow: 7px 7px 10px var(--shadow-colour);
+  background-color: var(--primary-background);
+  border-radius: 20px;
+  padding: 15px;
+  z-index: 2;
+  font-family: "BondiModa-VariableFont";
+}
+
+.grid {
+  filter: var(--icon-filter);
+  height: 9.7rem;
+  position: absolute;
+  z-index: -2;
+  top: 50%;
+  left: 50%;
+}
+
+.bg-element {
+  z-index: -1;
+  pointer-events: none;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transition: opacity 0.5s ease-in-out;
+  opacity: var(--bg-element-opacity);
+}
+
+@keyframes bobkf {
+  0%,
+  100% {
+    transform: translateY(0.3rem);
+  }
+  50% {
+    transform: translateY(-0.3rem);
+  }
+}
+
+.star {
+  filter: var(--icon-filter);
+  width: 2.7rem;
+  animation: bobkf 3s ease-in-out infinite;
+}
+
+@font-face {
+  font-family: "DMSerifDisplay-Regular";
+  src: url("/fonts/DMSerif.woff");
+}
+
+@font-face {
+  font-family: "BondiModa-VariableFont";
+  src: url("/fonts/BodoniModa-VariableFont_opszwght.woff");
+}
+
+@font-face {
+  font-family: "Tamzen";
+  src: url("/fonts/Tamzen8x15r.ttf");
+}
+
+.heading-text {
+  font-family: "DMSerifDisplay-Regular";
+  font-size: 2.5rem;
+  color: var(--primary-text);
+}
+
+.clickable {
+  cursor: pointer;
+  transition: color 0.5s ease-in-out;
+}
+
+.clickable:hover {
+  color: var(--clickable-hover);
+}
+
+.whole-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+}

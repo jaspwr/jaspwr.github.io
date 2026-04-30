@@ -1,0 +1,12 @@
+.daw-container {
+  max-width: 95%;
+  overflow-y: scroll;
+  overflow-x: visible;
+  max-height: 80vh;
+  color: var(--primary-text);
+  font-family: "BondiModa-VariableFont";
+}
+
+.daw-container img {
+  max-width: 100%;
+}
